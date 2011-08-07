@@ -1,0 +1,321 @@
+/*  Information/Progress of my first real project I am working on.
+
+July 29, 2009 - I started this pinochle game over again from scratch because the old code wouldn't work very well
+-Made the headers.h file, which will include all the headers need for the cpp files
+-Made the functions main, welcome
+
+August 18, 2009 - I got back to this project and am planning on looking the code and refamiliarize myself with it
+-Some more notes - This project will start in command prompt and when I learn enough I will try to move it to a window
+format
+-The game currently gets stuck on the first bid - the loop needs some work
+
+August 22, 2009 - Looked over code, need to change ongoin_bid, it is too local to be used throughout the program
+- code needs to be more simplified
+- made a dialouge.cpp for long pieces of dialouge
+( took a few from main and one from bid.cpp)
+- Remembered scoring was created, it will need to be integrated at the meld check after bidding.
+-Finished working at 1:50 in the morning - Hopefully I will be able to work on it tommorow
+
+August 25, 2009 - I made some revisions of the TODO list during my 6th hour free period
+-
+August 26, 2009 - Started working about 4:30 
+- I linked some functions together again, i will attempt to make some progress on
+
+August 29 & 30th - Worked a bit
+- Finished the player bidding so it is complete,  made the functions otherbiddingnorth, ...
+- Plan to work on the scoring, which is important for the computer players
+- Made some booleans for scoring
+
+September 4th- Worked about 11 to 12
+-Lots of the hard stuff finished
+-Made it so the other players also recieve cards, and put the output function for cards into a dialouge function.
+-Made many pointers for my work with scoring-- The goal is to make the card variables constant throughout the entire hand.
+
+September 5th- Worked
+-Cleaned up main() and made a game_loop.cpp for cleaner code
+
+September 6th - Watched the last 8 absolute n00b spoonfed 51 to 59
+- Learn references and another thing to do with classes.
+
+September 7th - Worked on the second function in scoring - Seperatecards()
+- Fixed the pointed mistake I had made before. -- Remeber advice about const keyword
+
+October 1st - Looked over code a bit.
+
+October 9th - Made some comments and deleted the work on scoring
+
+October 11/12th - Made huge changes to hand.cpp, made player and west player get completely different cards
+- Made 3 text outputs 
+- (3?) to find errors 
+- (1) to output the numbers to a text file
+- put the recievecards in loops, which is much better than the code i had before.. it took way too much space.
+- Because of the changes i made, bid will probably have to take ALOT more arguments
+- Finished about 1:45 in the morning / Remeber next 2 players getting completely different cards
+
+October 16th - Looking at code once again
+- Made shortcuts to find functions -- Search for function name with // in fromt *EXAMPLE* = //main
+
+November 21st - Looking over code in hand.cpp  - Shortening where possible - Trying to make it readable-usable
+
+Dec 8th - Tried to fix namepicking in dialouge.cpp - Didn't work, same as before .... :(
+- (Afternoon)
+	- Decided to make a list of useful reusable functions
+	- Decided to include a header file with all the necessary function declarations to improve readability
+	  - Did main.cpp
+	  - Did game_loop.cpp
+	  - Did hand.cpp
+	  - Did cards_being_passed.cpp
+	  - bid.cpp
+  
+    - Made c() , p(), and candp() to shortcut system("PAUSE") and ("cls")
+
+Dec 10th - Decided i will need to learn to make an erase fuction that is equivalent to system("cls") for linux
+		- Made erase(), it doesn't do anything right now
+		- Updated a couple more .cpp headers
+
+Dec 20th - Moved to my Desktop Computer
+         - I will keep trying to update the Dropbox project files if possible.
+		 - Figured out how to call .exe files in cpp -- use system("myexe.exe"), words great
+		 - Made a gui that will eventually take over as the game control. -- Hopefully lots of the code will work in the "graphic" version
+		 - Made a hand_dialouge.cpp to hold dialouge from hand, more oranized hopefully, this maybe needs a little more work
+
+Dec 24th - Made a "shorter" recievecards, the calling only takes 5 variables instead of 40 :)
+		 - More work on pinochle gui, found a function that gets the input of a dialogbox
+		 - Took the cards from reactos solitaire, which i will probably use with my game.
+		 - I can test if it will work natively with reactos later :)  -- It didn't, the runtime didn't install :(
+		 - more shortening of code like usual
+ December 27th and 28th - Made alot of code in play_hand.cpp
+		 - Made play_hand.h
+		 - Added a little code to classes.h - Especially function player::change() to make name1...ect in order
+ December 30th - Made playerwon() instead of hearts().. diamonds()
+		 - Made the filter playing and added play_hand_dialouge
+ Decmeber 31th - Did stuff that I didn't record.
+ January 1st, 2010- We are driving to Wisconin from Colorado
+ January 21st - I made the classes card and trick -- (Their names should be self explanatory, they work very well :)
+ I added 12 cards to the player class, and i might add 12 cards to playerhand and then have a instance of playerclass in player
+
+// Lots of these changes were not documented after January I believe
+
+June 7th, 2010 - I transfered it to Linux Ubuntu -- Rewrote p() and c() for linux pause and clear -- Used python for pause
+  -- Decided to start total rewrite of code -- I will start with main and later hand will be a nightmare.
+
+June 8th, 2010 - I have been writing more comments in hand.cpp 
+		-- Cleaned out headers.h (Deleted about 5 headers, got rid of a file.
+		-- Cleaned out unused output files that I used to get features to work.
+
+June 10th, 2010 - I have been constantly looking at code and commenting on it.  I have almost finished hand.cpp and will 
+probably start my renovations of it soon
+		- I did some major revisions to recieve_cards() and it is fully functional and has less arguments passed in with 300 less lines of code.  That is something to be proud of!
+		- I found a problem with a test that wasn't properly labelled.  NOTE to Self: Always label tests, and delete them as soon as possible!
+		- Finished at 1:42 AM On the 11th, I am pretty proud of what I did, i get recieve_cards down to 14 arguments!!
+	--- I should be able to get it down to 2 with a little more work!! 
+	-- I just realized I need to fix recieve_cards... but it is pretty easibly doable -- Time for bed!
+
+June 11th, 2010 - I fixed the problem in recieve_cards that I found yesterday and used file I/O to do it! --array.txt is from this
+
+June 12th, 2010 - I fixed a problem in bid.cpp with the bidding_func()
+		- Cleaned out classes.h -- Got rid of a few like playinghand, and other useless ones 
+		- I combined hearts, diamonds, clubs, spades into one class called suit, this however had issues with variables that were called suit -- i changed them to suitname or suitint
+		- I am down to 28 files in this project... That is about half of what I started at! Keep up the good work with the code simplifying!!! -- Time for bed!
+
+June 13th, 2010 - I am down to 26 files!! I deleted cards.cpp and cards_being_passed.cpp !!
+
+TODO: Lots of Work
+ * Check if the dealing part switches properly **** More complete - August 29th
+	* TODO: Clean up code - (ALOT!!)
+	* TODO: Check code -- Complete  | 2nd Time half done, got to hand.cpp (plenty of work needed there) // DONE
+	* TODO: Simplify code where possible 
+		// Did that in hand.cpp with recieve_cards // & Again but completely!!
+		// Need to do alot more of this the function declarations in headers should help a little with keeping it simple and readable
+	* TODO: SCORING - Right now I think this is the smartest approach (Need to Figure out how to keep
+	cards only for hand, but throughout the hand) // I did a little bit // & Done??
+	* TODO: PLAYING_HAND // & Done??
+
+	* TODO: In Hand.cpp finish it so scoring can work  /// DONE for the most part
+	* TODO: In Scoring.cpp finish it so it groups meld together 
+	* TODO: Update order of functions below -- A little more done Jan 1st
+	* TODO: Learn how to pass function definitions like hearts heart; //Done :)
+	* TODO: Practice File Input - Output -- #include <ofstream>  fstream fout("dog.txt"); fout << "Any text I want!" << endl;
+	* TODO: Find out what to put in other_bidding()
+	* TODO: Maybe declare all functions in a header file? //Done in separate headers file on Dec. 8th -- Good Idea?
+	* TODO: Work on GUI... learn more about that kind of programming
+	* TODO: Work through every function and report what it does -- // & This is what I am doing now!!
+	* TODO: Change the bidding order so the West player is after the player when bidding // & I caught that later -- but thanks for the heads up self
+
+ * Finish bidding, started some players, but they are not complete
+ 
+ * Get some scoring functions together
+
+ * Meld will need to be made after bidding, I can probably use a couple classes and make the functions in the classes, that will be good practice
+ * Playing the hand is the next step, this is involved quite a bit of work im sure - Including passing the cards I am making in hand.cpp
+ * Counting up the points , I should be able to use the classes I created before and functions in them to count them up quickly.
+ * Showing the score card after every round, this should be fairly easy, i plan to see if i can make something graphic, at 
+	least .... for command prompt
+`
+*** Order of the program functions //& And what they do
+(Probably Out of Date) as of 10/12/09
+//& I will have to redo this after I make the radical changes
+
+File:  Main.cpp
+	Purpose: Starts the Cpp Program
+	Prerequisites: 
+		Needs main.h 
+			-Includes:
+				headers.h, scoreclass.h, the prototypes to welcome(), game_loop(), and thanks_for_playing()
+	Functions:   
+		int main()
+			
+	Miscellaneous:
+		ostream &operator<<(ostream &os, card & c)
+
+
+What is working:
+	main()
+	dialouge.cpp functions -- As far as I know
+	game_loop()
+	namepicking()
+	
+What is semiworking:
+	hand() -- not quite complete
+
+What is not working:
+	play_hand()
+
+
+
+
+/*
+//// Different pieces of codes for use in this program
+
+function( stringname.c_str() );
+
+
+ (1)  system ("cls");
+ (2)  system ("PAUSE");
+
+ /*card12 = (78-(card1+card2+card3+card4+card5+card6+card7+card8+card9+card10+card11));
+	if (card12 == card1|| card12 == card2 || card12 == card3||card12 == card4||
+	card12== card5||card12==card6||card12 == card7||card12 ==card8||card12 == card9||card12 == card10||card12==card11)*/
+
+/*class function /// For Functions I will need in this program
+{
+public:
+	void rand0m(); ////
+	int random;  /// = 1
+	int n;
+	int rand00m(int n);
+	function();
+	void number();
+	int numb;
+};
+
+void function::rand0m()
+{
+	   	   
+	   srand(time(0));
+	   
+	   cout << random << endl;
+	   char short_break;
+	   cin >> short_break;
+		
+}
+
+int function::rand00m(int n)
+{
+	return rand() % n;
+}
+
+
+///Prints the Values of the Random Integer given to the cards dealt
+cout << card1 << " , " << card2 << " , " << card3 << " , " << card4 << " , " << card5 << " , " << card6 << " , " << card7 << " , " << endl;
+	cout << card8 << " , " << card9 << " , " << card10 <<  " , " << card11 << " , " << card12 << endl;
+
+
+
+*/
+
+
+
+
+/*
+	///Below is a quick test ... I will keep this just in case for the future
+	cout << "playercard1ptr: " << *playercard1ptr << endl;
+	cout << "playercard2ptr: " << *playercard2ptr << endl;
+	cout << "playercard3ptr: " << *playercard3ptr << endl;
+	cout << "playercard4ptr: " << *playercard4ptr << endl;	
+	cout << "playercard5ptr: " << *playercard5ptr << endl;
+	cout << "playercard6ptr: " << *playercard6ptr << endl;
+	cout << "playercard7ptr: " << *playercard7ptr << endl;
+	cout << "playercard8ptr: " << *playercard8ptr << endl;
+	cout << "playercard9ptr: " << *playercard9ptr << endl;
+	cout << "playercard10ptr: " << *playercard10ptr<< endl;
+	cout << "playercard11ptr: " << *playercard11ptr<< endl;
+	cout << "playercard12ptr: " << *playercard12ptr<< endl;
+
+
+	
+	play1.temporaryhack();
+	cout << play1.order1<< " , " << play1.order2<< " , "  << play1.order3 << " , " << play1.order4 << " , "  << endl  ;
+	cout  << play1.order5 << " , " << play1.order6 << " , " <<  play1.order7 << " , " << play1.order8 << " , " <<  endl;
+	cout << play1.order9 << " , " << play1.order10 << " , " << play1.order11 << " , " << play1.order12 << " , " << endl << endl;
+
+
+	void seperatecards(string * ,string  * ,string  * , string  * , string  * ,string  * ,
+		string  * , string  * , string * ,string  * , string  * , string  * );
+
+//Cards?
+		string ace[7];
+	 ace[0] = " __________  " ;
+	 ace[1] = "|          | " ;
+	 ace[2] = "| Ace      | " ;
+	 ace[3] = "|  of      | " ;
+	 ace[4] = "|   Hearts | " ;
+	 ace[5] = "|          | " ;
+	 ace[6] = "|__________| ";
+	
+	cout << endl;
+		cout << ace[0] << endl;
+		cout << ace[1] << endl;
+		cout << ace[2] << endl;
+		cout << ace[3] << endl;
+		cout << ace[4] << endl;
+		cout << ace[5] << endl;
+		cout << ace[6] << endl;
+
+
+
+
+		//system(" c:\\pinochlegui.exe");  //This is very useful!
+
+	//ShellExecuteA(NULL, "open", "http://dreamincode.net",
+               // NULL, NULL, SW_SHOWNORMAL);  Also useful!
+		
+*/
+
+/*    --Was in passing.cpp -- Used to have the players get cards  
+	
+		passing(&x, card1, suit, &a, &b, &c, &d );
+		passing(&x, card2, suit, &a, &b, &c, &d );
+		passing(&x, card3, suit, &a, &b, &c, &d );
+		if (x < 4) {passing(&x, card4, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card5, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card6, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card7, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card8, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card9, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card10, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card11, suit, &a, &b, &c, &d );}
+		if (x < 4) {passing(&x, card12, suit, &a, &b, &c, &d );}
+
+
+	Used to test how many cards were counted up -- Used to make sure the counter was working
+	int westcards = westheartnumber + westdiamondnumber + westspadenumber + westclubnumber;
+	int northcards = northheartnumber + northdiamondnumber + northspadenumber + northclubnumber;
+	int eastcards = eastheartnumber + eastdiamondnumber + eastspadenumber + eastclubnumber;
+
+	cout << "Westcards: " << westcards << endl;
+	cout << "Northcards: " << northcards << endl;
+	cout << "Eastcards: " << eastcards << endl;
+
+	pla.hearts::ace1bool -- Useful in getting inherited classes variables
+		*/
