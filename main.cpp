@@ -1,7 +1,7 @@
 ///Pinochle Project Main.cpp
 ///This will start as a command line project and eventually I hope to use it in a window based environment.
 
-#include "headers.h"    // These headers 
+#include "headers.h"    
 #include "scoreclass.h"
 
 void welcome();
@@ -11,15 +11,15 @@ void thanks_for_playing();
 
 ostream &operator<<(ostream &os, card & c){ cout << "(" << c.order << ") " << c.name ; 
 	return os;
-	}
+	} //11:  What class does this go to? What does this do?
 
 int main()	 ///main function - Program starts here
 {                  
-	string name;				
-		/// Makes the name ( first is the first name - second is the optional last name or second part)
+	string name;  /// Makes the name ( first is the first name - second is the optional last name or second part)
+		
 	bool keep_going = true;			/// Helps determine if the game should keep going
 	int score = 0;
-	scoreclass scr;
+	scoreclass scr;  
 	welcome();						/// this function is in maindialouge.cpp, it welcomes the player
 	namepicking(name);		///In maindialouge..helps the player make a name  
 	//-- This passes the names that the player will use
