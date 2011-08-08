@@ -120,6 +120,9 @@ June 12th, 2010 - I fixed a problem in bid.cpp with the bidding_func()
 
 June 13th, 2010 - I am down to 26 files!! I deleted cards.cpp and cards_being_passed.cpp !!
 
+August 8th, 2010 - Picked up this project after a year of neglect.  Let's see if I can fix this and get it working flawlessly finally.
+		- What I have noticed is that my program has a lot of crap.  To future self: Write beautiful the first time.
+
 TODO: Lots of Work
  * Check if the dealing part switches properly **** More complete - August 29th
 	* TODO: Clean up code - (ALOT!!)

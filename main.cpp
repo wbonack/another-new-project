@@ -5,39 +5,40 @@
 #include "scoreclass.h"
 
 void welcome();
-void namepicking(string & name);
-void game_loop(string * nameptr, int counter, bool * keep_goingptr, int &, scoreclass &);
+void pickname(string & name);
+bool game_loop( int counter,  scoreclass &);
 void thanks_for_playing();
+
 
 ostream &operator<<(ostream &os, card & c){ cout << "(" << c.order << ") " << c.name ; 
 	return os;
-	} //11:  What class does this go to? What does this do?
+	} 
 
 int main()	 ///main function - Program starts here
 {                  
-	string name;  /// Makes the name ( first is the first name - second is the optional last name or second part)
+	string name; 
 		
-	bool keep_going = true;			/// Helps determine if the game should keep going
-	int score = 0;
-	scoreclass scr;  
-	welcome();						/// this function is in maindialouge.cpp, it welcomes the player
-	namepicking(name);		///In maindialouge..helps the player make a name  
-	//-- This passes the names that the player will use
+	bool keep_going = true;		
 
-	candp();	//Windows only commands that make a Press any key to continue ..... and clear the console
-	// (I will have to find an alterative to this in linux.)  system("ifconfig") works great in linux!
+	int score = 0;
 	
-	for(int counter = 1; keep_going == true; counter++)  // Counter for the number of hands played
+	scoreclass scr;  
+	
+	welcome();						///  in maindialouge.cpp
+	
+	pickname(name);		///In maindialouge.cpp
+	
+	candp();	
+	
+	for(int counter = 1; keep_going == true; counter++)  /// counter keeps track of the number of hands played
 	{
-		if (keep_going)				// The loops for the game to continue
+		if (keep_going)				
 	  {		
-		 game_loop(&name, counter, &keep_going, score, scr); /// Goes to game loop in gameloop.cpp
-						
-		keep_going == false;
+		 keep_going = game_loop( counter,  scr); /// In game_loop.cpp	
 	  }
-		if (!keep_going)				// If keep going is false, this exits the game 
+		if (!keep_going)				
 	  {
-		 thanks_for_playing();			// Thanks for playing, which is after welcome, two functions down
+		 thanks_for_playing();			/// In maindialouge.cpp
 	  }
 	}
 }

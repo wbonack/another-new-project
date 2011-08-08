@@ -1,62 +1,61 @@
+/// My analysis on 8.8.11 is that this file is sloppy and isn't readable and not useful.  TODO: Write better code in the future.
+
 #include "headers.h"
 #include "scoreclass.h"
 #include "hand.h"
 
-void initarray(int howbig, int * array) // & 
+void zero_out_array(int array_size, int * array) 
 {
-int initialize = 0;
-while (initialize < howbig)
+int array_element = 0;
+while (array_element < array_size)
 	{
-		*array = 0; 
-		initialize++;
+		*array = 0; /// This is sloppy use of pointers, this could lead to a SERIOUS memory bug.
+		array_element++;
 		array++;
 	}
 }
 
-void deal(string * nameptr, int howmany, scoreclass & scr) //&Why is The function called deal - file called hand
+void deal(int hand_counter, scoreclass & scr) /// Change howmany to something that makes sense
 {
-	scoring score;   ///Class Scoring definition
-	//& This is a good example of ugly code writing -- There is a class called scoring and a scoreclass.....
-	//& I however do not know how to fix this at the moment
-
-	int suitint = 0; //Defined later by the player who bid the highest //& Used Two Times
-	int bidding_times = 3; //Used to say how many times the players have bid -- Used to return the bidder //& Used Once
-		//This needs to be kept either throughout the hand or use the howmany to figure it out!!
-	cout << "! # " << howmany << " !" << endl; 
+	int suitint = 0; 
+	int bidding_times = 3;
+	
+	cout << "! # " << hand_counter << " !" << endl; 
 	cout << "-------" << endl;
-		// Displays the number of times the program has run //&Passed in Used Twice in deal
-	string dealerstring;   //String to return who is dealing //& Used in finddealer two times.
-	finddealer(&howmany, &dealerstring);  // Interger function that helps tell us who is dealing -- Found later in hand.cpp
+		
+	string dealer;   
+	finddealer(&hand_counter, &dealer);  /// in hand.cpp
 
-	//cout << "Dealerstring: " << dealerstring << endl;
+
 	p();
 
 	int counter = 1;
-        player play = recieve_cards(counter); // & This deals the player their cards.
+        player play = recieve_cards(counter); 
 
-	player wplay = recieve_cards(counter); // & This deals the westplayer their cards.
+	player wplay = recieve_cards(counter); 
 	
 	play.getorder();
-	cout << endl << "You recieved: " << endl; // goes before telling the players all the cards they recieved
-	//cout << "A " ;
+	
+	cout << endl << "You recieved: " << endl; 
+	
 	play.cardnames();
 
 	///These are the north computer players cards
-	player nplay = recieve_cards(counter); // & This deals the northplayer their cards
+	player nplay = recieve_cards(counter); 
 
 	///These are the east computer players cards
-	player eplay = recieve_cards(counter);  // & This deals the eastplayer their cards
+	player eplay = recieve_cards(counter);  
 	
-	int ongoin_bid = 1; // The bid that will be passed around alot to help the players bid
+	int ongoin_bid = 1; /// The bid that will be passed around alot
 
-	// The right bid for the computer is passed into the bid function, not all the cards/ junk
 	int westpot = 0,northpot = 0,eastpot = 0,westscore = 0, northscore = 0,eastscore = 0, playerpot = 0, playerscore = 0;
 
 	bool  westwin = false, northwin = false, eastwin = false, playerwin = false; 
-		//The winning variables which are used by passing|scoring|playhand ..etc
+		
 	
 	int card_passed[8];
-	initarray(8, &card_passed[0]); // Located before deal(), it has
+	
+	zero_out_array(8, &card_passed[0]); /// at the beginning of this file.
 
 	string ppassed1, ppassed2, ppassed3, ppassed4; //Names of the cards passed later
 	///The first call which tells the computer players their bids
@@ -65,9 +64,10 @@ void deal(string * nameptr, int howmany, scoreclass & scr) //&Why is The functio
 
 	bool westpass = false, northpass = false, eastpass = false, playerpass = false; // Booleans to see if the player passed
 	int newcounter = 1, finalbid = 0; /// newcounter -- Used in bid() and bid.cpp functions, finalbid -- holds finalbid
+	
 	string winnername, suitname; // Makes the string that will hold the winner's name | suitname
 
-	//hearts heart;
+
 	suit heart("heart");
 	suit diamond("diamond");
 	suit spade("Spade");
@@ -180,7 +180,6 @@ void deal(string * nameptr, int howmany, scoreclass & scr) //&Why is The functio
 	cout << " West is : " <<  westscore << endl; 
 	cout << " North is : " <<  northscore << endl;
 	cout << " East is : " <<  eastscore << endl;
-	
 
 	line();
 	
@@ -238,7 +237,7 @@ void srand_()
 	srand((unsigned)time(NULL));
 }
 
-int finddealer(int * whoptr, string * dealerstring)
+int finddealer(int * whoptr, string * dealer)
 {
 	int local_counter = *whoptr;
 	while (local_counter > 4)
@@ -250,25 +249,25 @@ int finddealer(int * whoptr, string * dealerstring)
 	case 1: 
 		{
 			cout << "You are the dealer." << endl;
-			*dealerstring = "Player";
+			*dealer = "Player";
 			break;
 		}
 	case 2:
 		{
 			cout << "West is dealing" << endl;
-			*dealerstring = "West";
+			*dealer = "West";
 			break;
 		}
 	case 3: 
 		{
 			cout << "North is dealing" << endl;
-			*dealerstring = "North" ;
+			*dealer = "North" ;
 			break;
 		}
 	case 4:
 		{bool continuetheforloop = true; // Used below to keep the loop going // & Used in bid, if statement
 			cout << "East is dealing" << endl;
-			*dealerstring = "East";
+			*dealer = "East";
 			break;
 		}
 	default:
@@ -281,7 +280,7 @@ return *whoptr;
 
 
 void playersuits(string * westsuit, string * northsuit, string * eastsuit, int wh, int nh, int eh, int wd, int nd, int ed, 
-				 int ws,int ns, int es, int wc,int nc, int ec)
+				 int ws,int ns, int es, int wc,int nc, int ec) /// This is confusing: TODO: Clean this so it makes sense/ check if it even works
 {
 	//Explain the letters and if statements
 	//.  Here is the deal.  This needs a better AI to work efficiently.

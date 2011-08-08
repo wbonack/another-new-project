@@ -257,7 +257,7 @@ int bidding(int * bidding_counter, bool * loop, int * ongoinptr, bool * playerpa
 
 	if (bidding_decision ==5)
 	{
-		cout << "Cheater: Ok, you bid: " << 99 << endl;
+		cout << "Cheater!: Ok, you bid: " << 99 << endl;
 				ongoing_bid = 99;
 	}
 	

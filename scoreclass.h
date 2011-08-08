@@ -1,6 +1,6 @@
 class scoreclass
 {
-	int player, west, north, east, team1, team2, team1old[50], team2old[50]; // & Why are the last two arrays?
+	int player, west, north, east, team1, team2, team1old[50], team2old[50];
 	void combinescores();
 
 public:
@@ -29,6 +29,6 @@ public:
 		The access without arguments return the value of the player.
 		Access with arguments changes the value to that of the argument
 		Scoreteam returns the value of team1 or 2
-		oldteam with one argument accesses the team from the hand specified in the argument // & ???
+		oldteam with one argument accesses the team from the hand specified in the argument 
 		oldteam with two arguments
 */
