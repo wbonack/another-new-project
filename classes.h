@@ -1,7 +1,7 @@
 #include <string>
 using namespace std;
 #include <iostream>
-
+class player;
 class suit // This replaced 4 classes I made earlier!!
 {
 	string nameofsuit;
@@ -39,7 +39,7 @@ class suit // This replaced 4 classes I made earlier!!
 	std::string jackname;
 	std::string ninename;
 
-	int howmanyofsuit(int, int, int, int, int, int, int, int, int, int, int, int);
+	int howmanyofsuit(player & play);
 
 	suit();
 	suit(string suitname);
@@ -86,8 +86,6 @@ public:
 	scoring();
 
 };
-
-
 class hand: public suit// Most useless class ever -- Used however in a class -- This is also the name of a cpp file....
 {
 public:
@@ -116,33 +114,6 @@ public:
 	friend ostream &operator<<(ostream &os, card & c); //This makes me able to print it out to the screen 
 	bool operator ==(const card a){ return(a.number == number);}
 	bool operator <=(const card &a);
-};
-
-class trick
-{
-public:
-	bool istopbidder;
-	int points;
-	card trickwinner;
-	string nametrickwinner;
-	card a, b, c, d;
-	trick();
-	trick(card, card, card, card);  // This declaration makes everything work.
-	void cards();
-		
-private:
-void countpoints();
-void addtotrick(card & a, card &, card &, card &);
-
-};
-
-class alltrick
-{
-public:
-	trick a, b, c, d, e, f, g, h, i, j, k, l;
-	
-	alltrick();
-	alltrick(trick, trick, trick, trick, trick, trick, trick, trick, trick, trick, trick, trick);
 };
 
 class player // & This should be documented so that the programmer understands all the functions of it 
@@ -190,4 +161,37 @@ public:
 private:
 	bool order1true, order2true, order3true, order4true, order5true, order6true, order7true, order8true, order9true, order10true,order11true, order12true;
 };
+
+
+
+
+
+class trick
+{
+public:
+	bool istopbidder;
+	int points;
+	card trickwinner;
+	string nametrickwinner;
+	card a, b, c, d;
+	trick();
+	trick(card, card, card, card);  // This declaration makes everything work.
+	void cards();
+		
+private:
+void countpoints();
+void addtotrick(card & a, card &, card &, card &);
+
+};
+
+class alltrick
+{
+public:
+	trick a, b, c, d, e, f, g, h, i, j, k, l;
+	
+	alltrick();
+	alltrick(trick, trick, trick, trick, trick, trick, trick, trick, trick, trick, trick, trick);
+};
+
+
 

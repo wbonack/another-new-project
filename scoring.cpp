@@ -358,3 +358,12 @@ void sortcards(int * biddingscore,int card1,int card2,int card3,int card4,int ca
 	
 	*playerscore = totalsofar;
 }
+
+
+scoring::scoring():
+
+aces_around(10), double_aces_around(100), kings_around(8), double_kings_around(40), queens_around(6), double_queens_around(30), 
+jacks_around(4), double_jacks_around(20), marriage(2), marriage_in_trump(4), marriages_around(80), double_marriage(30), book(15), 
+double_book(150), pinochle(4), double_pinochle(30), score(0)
+
+{};

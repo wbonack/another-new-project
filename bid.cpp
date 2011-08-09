@@ -15,7 +15,7 @@ void bid(string westsuit, string northsuit, string eastsuit, int* newcounter, in
 	string bidder; 
 	int bidforloopcounter = *timesbidding;
 	bool dog = true;
-	bool bidding_func(string, string, string,string bidder, int *, int * timesbidding, int bidforloopcounter,bool * 		loop, int * ongoinptr,int,int,int,bool *,bool*, bool*, bool*, bool*, bool*, bool*, bool*, string *, 	
+	bool bidding_func(string, string, string,string bidder, int *, int * timesbidding, int bidforloopcounter,bool * loop, int * ongoinptr,int,int,int,bool *,bool*, bool*, bool*, bool*, bool*, bool*, bool*, string *, 	
 		int*, player);
 	
 	*forloopptr = bidding_func(westsuit, northsuit, eastsuit, bidder, newcounter, timesbidding, bidforloopcounter, &dog, 	

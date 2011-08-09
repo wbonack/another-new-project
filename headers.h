@@ -16,7 +16,6 @@ void c();
 void candp();
 void erase();
 
-int number(int, int, int, int,int,int,int,int,int,int,int,int, int , int); // This is in classes.cpp
+int number(player play, int lower_number_limit , int upper_number_limit); // This is in classes.cpp
 
-void playersuits(string * westsuit, string * northsuit, string * eastsuit, int wh, int nh, int eh, int wd, int nd, int ed, 
-				 int ws,int ns, int es, int wc,int nc, int ec); //  This is in cards.cpp
+void playersuits(string * westsuit, string * northsuit, string * eastsuit, player west_player, player north_player, player east_player); //  This is in cards.cpp

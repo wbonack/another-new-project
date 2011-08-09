@@ -1,4 +1,4 @@
-/// My analysis on 8.8.11 is that this file is sloppy and isn't readable and not useful.  TODO: Write better code in the future.
+/// My analysis on 8.8.11 is that this file is sloppy and isn't readable.  TODO: Write better code in the future.
 
 #include "headers.h"
 #include "scoreclass.h"
@@ -26,10 +26,7 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	string dealer;   
 	finddealer(&hand_counter, &dealer);  /// in hand.cpp
 
-
-	p();
-
-	int counter = 1;
+	int counter = 1; ///  What the fuck!!!
         player play = recieve_cards(counter); 
 
 	player wplay = recieve_cards(counter); 
@@ -51,7 +48,6 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	int westpot = 0,northpot = 0,eastpot = 0,westscore = 0, northscore = 0,eastscore = 0, playerpot = 0, playerscore = 0;
 
 	bool  westwin = false, northwin = false, eastwin = false, playerwin = false; 
-		
 	
 	int card_passed[8];
 	
@@ -67,53 +63,27 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	
 	string winnername, suitname; // Makes the string that will hold the winner's name | suitname
 
-
 	suit heart("heart");
-	suit diamond("diamond");
-	suit spade("Spade");
-	suit club("clubs");
 
 	//These return how many of each suit the players have -- Allows them to easily pick their best suit
-	int westheartnumber = heart.howmanyofsuit(wplay.card1, wplay.card2, wplay.card3, wplay.card4, wplay.card5, 
-		wplay.card6, wplay.card7, wplay.card8, wplay.card9, wplay.card10, wplay.card11, wplay.card12);
-	int northheartnumber = heart.howmanyofsuit(nplay.card1, nplay.card2, nplay.card3, nplay.card4, nplay.card5, 
-		nplay.card6, nplay.card7, nplay.card8, nplay.card9, nplay.card10, nplay.card11, nplay.card12);
-	int eastheartnumber = heart.howmanyofsuit(eplay.card1, eplay.card2, eplay.card3, eplay.card4, eplay.card5, 
-		eplay.card6, eplay.card7, eplay.card8, eplay.card9, eplay.card10, eplay.card11, eplay.card12);
-	int westdiamondnumber = diamond.howmanyofsuit(wplay.card1, wplay.card2, wplay.card3, wplay.card4, wplay.card5, 
-		wplay.card6, wplay.card7, wplay.card8, wplay.card9, wplay.card10, wplay.card11, wplay.card12);
-	int northdiamondnumber = diamond.howmanyofsuit(nplay.card1, nplay.card2, nplay.card3, nplay.card4, nplay.card5, 
-		nplay.card6, nplay.card7, nplay.card8, nplay.card9, nplay.card10, nplay.card11, nplay.card12);
-	int eastdiamondnumber = diamond.howmanyofsuit(eplay.card1, eplay.card2, eplay.card3, eplay.card4, eplay.card5, 
-		eplay.card6, eplay.card7, eplay.card8, eplay.card9, eplay.card10, eplay.card11, eplay.card12);
-	int westspadenumber = spade.howmanyofsuit(wplay.card1, wplay.card2, wplay.card3, wplay.card4, wplay.card5, 	
-		wplay.card6, wplay.card7, wplay.card8, wplay.card9, wplay.card10, wplay.card11, wplay.card12);
-	int northspadenumber = spade.howmanyofsuit(nplay.card1, nplay.card2, nplay.card3, nplay.card4, nplay.card5, 
-		nplay.card6, nplay.card7, nplay.card8, nplay.card9, nplay.card10, nplay.card11, nplay.card12);
-	int eastspadenumber = spade.howmanyofsuit(eplay.card1, eplay.card2, eplay.card3, eplay.card4, eplay.card5, 
-		eplay.card6, eplay.card7, eplay.card8, eplay.card9, eplay.card10, eplay.card11, eplay.card12);
-	int westclubnumber = club.howmanyofsuit(wplay.card1, wplay.card2, wplay.card3, wplay.card4, wplay.card5, wplay.card6, 
-		wplay.card7, wplay.card8, wplay.card9, wplay.card10, wplay.card11, wplay.card12);
-	int northclubnumber = club.howmanyofsuit(nplay.card1, nplay.card2, nplay.card3, nplay.card4, nplay.card5, 
-		nplay.card6, nplay.card7, nplay.card8, nplay.card9, nplay.card10, nplay.card11, nplay.card12);
-	int eastclubnumber = club.howmanyofsuit(eplay.card1, eplay.card2, eplay.card3, eplay.card4, eplay.card5, 
-		eplay.card6, eplay.card7, eplay.card8, eplay.card9, eplay.card10, eplay.card11, eplay.card12);
+	 heart.howmanyofsuit(wplay);
+	 heart.howmanyofsuit(nplay);
+	 heart.howmanyofsuit(eplay);
+	
 		
 	string westsuit;  // Holds the best suit for the players  // & playersuits(), bid()
 	string northsuit; // & playersuits(), bid()
 	string eastsuit;  // & playersuits(), bid()
 	
 	 //located in cards.cpp -- Decides the best suit
-	playersuits(&westsuit, &northsuit, &eastsuit, westheartnumber,northheartnumber,eastheartnumber, westdiamondnumber,
-		northdiamondnumber, eastdiamondnumber,westspadenumber,northspadenumber,eastspadenumber, westclubnumber,
-		northclubnumber,eastclubnumber);
+	playersuits(&westsuit, &northsuit, &eastsuit, wplay, nplay, eplay);
 
 	play.getorder();
 
 	bool continuetheforloop = true; // Used below to keep the loop going // & Used in bid, if statement
 	while(continuetheforloop == true) // Bidding Loop
 {	 
-	bid(westsuit, northsuit, eastsuit,&newcounter,&bidding_times, &continuetheforloop, &ongoin_bid, westpot , northpot, 			eastpot ,&playerpass, &westpass,&northpass,&eastpass,&westwin, &northwin, &eastwin, &playerwin, 
+	bid(westsuit, northsuit, eastsuit,&newcounter,&bidding_times, &continuetheforloop, &ongoin_bid, westpot , northpot, eastpot ,&playerpass, &westpass,&northpass,&eastpass,&westwin, &northwin, &eastwin, &playerwin, 
 		&finalbid, &winnername, &suitint, play); 
 
 		if (suitint > 0)
@@ -279,45 +249,40 @@ return *whoptr;
 }
 
 
-void playersuits(string * westsuit, string * northsuit, string * eastsuit, int wh, int nh, int eh, int wd, int nd, int ed, 
-				 int ws,int ns, int es, int wc,int nc, int ec) /// This is confusing: TODO: Clean this so it makes sense/ check if it even works
+void playersuits(string * westsuit, string * northsuit, string * eastsuit, player west_player, player north_player, player east_player) 
+				 /// This is confusing: TODO: Clean this so it makes sense/ check if it even works
 {
-	//Explain the letters and if statements
-	//.  Here is the deal.  This needs a better AI to work efficiently.
-
-	//wh : westheartnumber 	    //nh : northheartnumber     //eh : eastheartnumber
-	//wd : westdiamondnumber    //nd : northdiamondnumber   //ed : eastdiamondnumber
-	//ws : westspadenumber      //ns : northspadenumber     //es : eastspadenumber
-	//wc : westclubnumber	    //nc : northclubnumber      //ec : eastclubnumber
+	/// This is a hack and doesn't really pick the best suit for the opposing player.  
 	
-	if (wh > wd && wh > ws && wh > wc)
+	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
 	{	*westsuit = "Hearts";	}
 
-	if (wd > wh && wd > ws && wd > wc)
+	if (west_player.howmanydiamonds > west_player.howmanyhearts && west_player.howmanydiamonds > west_player.howmanyspades && west_player.howmanydiamonds >  west_player.howmanyclubs)
 	{*westsuit = "Diamonds";}
 
-	if (ws > wd && ws > wh && ws > wc)
+	if (west_player.howmanyspades > west_player.howmanydiamonds && west_player.howmanyspades > west_player.howmanyhearts && west_player.howmanyspades >  west_player.howmanyclubs)
 	{	*westsuit = "Spades";}
 
-	if (wc > wd && wc > ws && wc > wh)
+	if ( west_player.howmanyclubs > west_player.howmanydiamonds &&  west_player.howmanyclubs > west_player.howmanyspades &&  west_player.howmanyclubs > west_player.howmanyhearts)
 	{	*westsuit = "Clubs";}
 
 	if (*westsuit != "Hearts" && *westsuit != "Diamonds" && *westsuit != "Spades" && *westsuit != "Clubs")
 	{
+		//if (west_clubs == west_diamonds || west_diamonds == west_hearts 
 		//cout << "There was an error with Westsuit! in cards.cpp -- playersuits()" << endl;
 		*westsuit = "Clubs";
 	}
 
-	if (nh > nd && nh >ns && nh > nc)
+	if (north_player.howmanyhearts > north_player.howmanydiamonds && north_player.howmanyhearts >north_player.howmanyspades&& north_player.howmanyhearts > north_player.howmanyclubs)
 	{	*northsuit = "Hearts";}
 
-	if (nd > nh && nd > ns && nd > nc)
+	if (north_player.howmanydiamonds > north_player.howmanyhearts && north_player.howmanydiamonds > north_player.howmanyspades && north_player.howmanydiamonds > north_player.howmanyclubs)
 	{	*northsuit = "Diamonds";}
 
-	if (ns > nd && ns > nh && ns > nc)
+	if (north_player.howmanyspades > north_player.howmanydiamonds && north_player.howmanyspades > north_player.howmanyhearts && north_player.howmanyspades > north_player.howmanyclubs)
 	{	*northsuit = "Spades";}
 
-	if (nc > nd && nc > ns && nc > nh)
+	if (north_player.howmanyclubs > north_player.howmanydiamonds && north_player.howmanyclubs > north_player.howmanyspades && north_player.howmanyclubs > north_player.howmanyhearts)
 	{	*northsuit = "Clubs"; }
 
 	if (*northsuit != "Hearts" && *northsuit != "Diamonds" && *northsuit != "Spades" && *northsuit != "Clubs")
@@ -326,16 +291,16 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, int w
 		*northsuit = "Clubs";
 	}
 
-	if (eh > ed && eh > es && eh > ec)
+	if (east_player.howmanyhearts > east_player.howmanydiamonds && east_player.howmanyhearts > east_player.howmanyspades && east_player.howmanyhearts > east_player.howmanyclubs)
 	{	*eastsuit = "Hearts";}
 
-	if (ed > eh && ed > es && ed > ec)
+	if (east_player.howmanydiamonds > east_player.howmanyhearts && east_player.howmanydiamonds > east_player.howmanyspades && east_player.howmanydiamonds > east_player.howmanyclubs)
 	{	*eastsuit = "Diamonds";}
 
-	if (es > ed && es > eh && es > ec)
+	if (east_player.howmanyspades > east_player.howmanydiamonds && east_player.howmanyspades > east_player.howmanyhearts && east_player.howmanyspades > east_player.howmanyclubs)
 	{	*eastsuit = "Spades";}
 
-	if (ec > ed && ec >es && ec > eh)
+	if (east_player.howmanyclubs > east_player.howmanydiamonds && east_player.howmanyclubs >east_player.howmanyspades && east_player.howmanyclubs > east_player.howmanyhearts)
 	{	*eastsuit = "Clubs"; }
 
 	if (*eastsuit != "Hearts" && *eastsuit != "Diamonds" && *eastsuit != "Spades" && *eastsuit != "Clubs")
@@ -344,3 +309,5 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, int w
 		*eastsuit = "Clubs";
 	}
 }
+
+
