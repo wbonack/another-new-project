@@ -2,6 +2,10 @@
 #include <fstream>
 	card::card(){  };
 
+ostream &operator<<(ostream &os, card & c){ cout << "(" << c.order << ") " << c.name ; 
+	return os;
+	} 
+	
 	card::card(int card)
 	{
 		trump = false;

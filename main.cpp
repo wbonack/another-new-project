@@ -9,24 +9,19 @@ void pickname(string & name);
 bool game_loop( int counter,  scoreclass &);
 void thanks_for_playing();
 
-
-ostream &operator<<(ostream &os, card & c){ cout << "(" << c.order << ") " << c.name ; 
-	return os;
-	} 
-
 int main()	 ///main function - Program starts here
 {                  
-	string name; 
+	string Player_name; 
 		
 	bool keep_going = true;		
 
 	int score = 0;
 	
-	scoreclass scr;  
+	scoreclass scr;      		/// Is this really necessary / What does this do?
 	
-	welcome();						///  in maindialouge.cpp
+	welcome();					///  in maindialouge.cpp
 	
-	pickname(name);		///In maindialouge.cpp
+	pickname(Player_name);				///In maindialouge.cpp
 	
 	candp();	
 	

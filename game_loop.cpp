@@ -8,13 +8,11 @@ bool game_loop( int counter, scoreclass & scr)
 ///TODO:  Later we will need a way to pass scores from hand to hand
 {
 	deal( counter, scr);	 /// in hand.cpp
-			
-///TODO: Fix these if statements so if one team wins the other can't
 	
-	if (scr.scoreteam1() >= 150) 
+	if ((scr.scoreteam1() >= 150 && scr.scoreteam2() < scr.scoreteam1()) 
 		{ line();  cout << "Team1 won the game!" << endl;  p(); return false;}
 			
-	if (scr.scoreteam2() >= 150) 
+	if (scr.scoreteam2() >= 150 && scr.scoreteam1() < scr.scoreteam2()) 
 		{ line();  cout << "Team2 won the game!" << endl;  p(); return false;}
 			
 	//TODO:  implement the hiscores/wins to a file or something.
