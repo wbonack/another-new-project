@@ -254,6 +254,12 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 {
 	/// This is a hack and doesn't really pick the best suit for the opposing player.  
 	
+	/* To find the best suit:
+		1) Find the suit with the most cards
+		2) Pick the suit with the most powerful cards / best chance at winning the hand.
+		3) Keep pinochles in mind when deciding / double runs although rare.
+	*/
+	
 	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
 	{	*westsuit = "Hearts";	}
 
@@ -265,7 +271,16 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 
 	if ( west_player.howmanyclubs > west_player.howmanydiamonds &&  west_player.howmanyclubs > west_player.howmanyspades &&  west_player.howmanyclubs > west_player.howmanyhearts)
 	{	*westsuit = "Clubs";}
-
+	
+	ofstream out("error.txt");
+	out << "West power is: " << west_player.first1.power << endl;
+	out.close();
+	if (west_player.howmanyhearts == west_player.howmanydiamonds)
+	{
+		/// Check which suit has more power.
+		
+		
+	}
 	if (*westsuit != "Hearts" && *westsuit != "Diamonds" && *westsuit != "Spades" && *westsuit != "Clubs")
 	{
 		//if (west_clubs == west_diamonds || west_diamonds == west_hearts 

@@ -106,7 +106,7 @@ public:
 	int power, number;
 	bool played, trump;
 	int suittofollow;
-	card whichwins(card &, card &, card &, card &);
+	card whichwins(card &, card &, card &, card &); // Check this-- It might be broken
 	card(int);
 	card();
 	void istrump(int); 
@@ -161,10 +161,6 @@ public:
 private:
 	bool order1true, order2true, order3true, order4true, order5true, order6true, order7true, order8true, order9true, order10true,order11true, order12true;
 };
-
-
-
-
 
 class trick
 {
