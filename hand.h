@@ -1,6 +1,6 @@
 int finddealer(int * whoptr, string *);
 
-player recieve_cards(int &);
+player recieve_cards(int player_number);
 //located in recieve_cards
 
 void saythecards(string,string,string,string,string,string,string, string,string,string,string,string,string *, string *,

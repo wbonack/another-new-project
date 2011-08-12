@@ -9,7 +9,7 @@ bool game_loop( int counter, scoreclass & scr)
 {
 	deal( counter, scr);	 /// in hand.cpp
 	
-	if ((scr.scoreteam1() >= 150 && scr.scoreteam2() < scr.scoreteam1()) 
+	if (scr.scoreteam1() >= 150 && scr.scoreteam2() < scr.scoreteam1()) 
 		{ line();  cout << "Team1 won the game!" << endl;  p(); return false;}
 			
 	if (scr.scoreteam2() >= 150 && scr.scoreteam1() < scr.scoreteam2()) 

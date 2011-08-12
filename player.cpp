@@ -9,13 +9,17 @@ card1(0), card2(0), card3(0), card4(0), card5(0), card6(0), card7(0), card8(0), 
 {};
 
 
-player::player(int a,int b,int c, int d,int e,int f,int g,int h,int i,int j ,int k ,int l):
-
-card1(a), card2(b), card3(c), card4(d), card5(e), card6(f), card7(g), card8(h), card9(i), card10(j), card11(k), card12(l),
-	order1true(true), order2true(true), order3true(true), order4true(true), order5true(true), order6true(true),
-	order7true(true), order8true(true), order9true(true), order10true(true), order11true(true), order12true(true),
-	howmanyhearts(0), howmanydiamonds(0), howmanyclubs(0), howmanyspades(0)
-{};
+player::player(int a,int b,int c, int d,int e,int f,int g,int h,int i,int j ,int k ,int l)
+{
+card1 = a, card2 = b, card3 = c, card4 = d, card5 = e, card6 = f, card7 = g, card8 = h, card9 = i, card10 = j, card11 = k, card12 = l;
+card da1(card1), da2(card2), da3(card3), da4(card4), da5(card5), da6(card6), da7(card7), da8(card8), da9(card9), da10
+		(card10), da11(card11), da12(card12);
+	first1 = da1, second1 = da2; third1 = da3; fourth1 = da4; fifth1 = da5; sixth1 = da6; seventh1 = da7; eight1 = da8;
+		ninth1 = da9, tenth1 = da10, eleventh1 = da11, twelth1 = da12;
+	order1true = true; order2true = true; order3true = true; order4true = (true); order5true = (true); order6true = (true);
+	order7true = (true), order8true  = (true), order9true = (true), order10true=(true), order11true =(true), order12true = (true);
+	howmanyhearts = 0, howmanydiamonds = 0, howmanyclubs = 0, howmanyspades = 0;
+};
 
 void player::order(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l)
 {
@@ -155,6 +159,7 @@ void player::convert() // & Used in temporaryhack
 		(card10), da11(card11), da12(card12);
 	first1 = da1, second1 = da2; third1 = da3; fourth1 = da4; fifth1 = da5; sixth1 = da6; seventh1 = da7; eight1 = da8;
 		ninth1 = da9, tenth1 = da10, eleventh1 = da11, twelth1 = da12;
+	
 }
 
 void player::saycards() // Used when player is playing their hand and checks if it is played before showing it

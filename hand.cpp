@@ -26,10 +26,9 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	string dealer;   
 	finddealer(&hand_counter, &dealer);  /// in hand.cpp
 
-	int counter = 1; ///  What the fuck!!!
-        player play = recieve_cards(counter); 
+	player play = recieve_cards(1); 
 
-	player wplay = recieve_cards(counter); 
+	player wplay = recieve_cards(2); 
 	
 	play.getorder();
 	
@@ -38,10 +37,10 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	play.cardnames();
 
 	///These are the north computer players cards
-	player nplay = recieve_cards(counter); 
+	player nplay = recieve_cards(3); 
 
 	///These are the east computer players cards
-	player eplay = recieve_cards(counter);  
+	player eplay = recieve_cards(4);  
 	
 	int ongoin_bid = 1; /// The bid that will be passed around alot
 
@@ -69,7 +68,6 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	 heart.howmanyofsuit(wplay);
 	 heart.howmanyofsuit(nplay);
 	 heart.howmanyofsuit(eplay);
-	
 		
 	string westsuit;  // Holds the best suit for the players  // & playersuits(), bid()
 	string northsuit; // & playersuits(), bid()

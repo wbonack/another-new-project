@@ -39,7 +39,7 @@ ostream &operator<<(ostream &os, card & c){ cout << "(" << c.order << ") " << c.
 		if (card == s.ace1) {h.spade.ace1bool = true; name = s.acename; suitnumber = 3; played = false; power = 1;}
 		if (card == s.ace2) {h.spade.ace2bool = true; name = s.acename; suitnumber = 3; played = false; power = 1;}
 		if (card == s.ten1) {h.spade.ten1bool = true; name = s.tenname; suitnumber = 3; played = false; power = 2;}
-		if (card == s.ten2) {h.spade.ten2bool = true; name = s.tenname; suitnumber = 3; played = false; power = 2;}
+		if (card == s.ten2) {h.spade.ten2bool = true; name = s.tenname; suitnumber = 3; played = false; power = 2;} // Why is played initialized in only half of these?
 		if (card == s.king1) {h.spade.king1bool = true; name = s.kingname; suitnumber = 3;  power = 3;}
 		if (card == s.king2) {h.spade.king2bool = true; name = s.kingname; suitnumber = 3;  power = 3;}
 		if (card == s.queen1) {h.spade.queen1bool = true; name = s.queenname; suitnumber = 3;  power = 4;}

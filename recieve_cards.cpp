@@ -1,6 +1,6 @@
 #include "headers.h"
 
-player recieve_cards(int & recieve_cardscounter)
+player recieve_cards(int recieve_cardscounter)
 {	
 	int card1 = 0, card2 = 0, card3 = 0, card4 = 0,  card5 = 0,  card6 = 0, card7 = 0,  card8 = 0,  card9 = 0, card10 = 0,
 		card11 = 0, card12 = 0;
@@ -96,7 +96,6 @@ player play(card1, card2, card3, card4, card5, card6, card7, card8, card9, card1
 	play.name11 = whatiscard1(&card11);
 	play.name12 = whatiscard1(&card12);
 
-recieve_cardscounter++;
 return play;
 }
 
