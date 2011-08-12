@@ -1,6 +1,6 @@
 #include "headers.h"
 
-// & This file has over 526 lines!! It needs to be simplified!
+// & This file has over 526 lines and is unreadable!! It needs to be simplified!
 
 void playerspassing(string, int, int, int, int, int, int, int, int, int, int, int, int, int & , int &, int &, int &, bool, 
 	string *, string *, string *, string*);
@@ -457,8 +457,8 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 
 		whichcard  = go(nplay, winnersfourth, *card4 );
 
-		play.change();
-		nplay.change();
+		play.get_names();
+		nplay.get_names();
 	}
 	if (winner == "West")
 	{
@@ -482,8 +482,8 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 		whichcard  = go(eplay, winnersfourth, *card4 );
 		cout << "Whichcard: " << whichcard << endl;
 
-		wplay.change();
-		eplay.change();
+		wplay.get_names();
+		eplay.get_names();
 
 	}
 	if (winner == "North")
@@ -508,8 +508,8 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 		whichcard  = go(play, winnersfourth, *card4 );
 		cout << "Whichcard: " << whichcard << endl;
 
-		nplay.change();
-		play.change();
+		nplay.get_names();
+		play.get_names();
 
 	}
 	if (winner == "East")
@@ -534,8 +534,8 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 		whichcard  = go(wplay, winnersfourth, *card4 );
 		cout << "Whichcard: " << whichcard << endl;
 
-		eplay.change();
-		wplay.change();
+		eplay.get_names();
+		wplay.get_names();
 
 	}
 

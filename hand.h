@@ -8,7 +8,7 @@ void saythecards(string,string,string,string,string,string,string, string,string
 
 	void cardnumbers(int card1, int card2, int card3, int card4, int card5, int card6, int card7, int, int, int, int, int);
 
-	void scoring_func(int *, int * , int *, int *, int*, int*, int *, int *,player *, player *, player *, player *);
+	void scoring_func(int*, int*, int *, int *,player *, player *, player *, player *);
 
 	void bid(string, string, string,int *,int *,bool *,int * ,int,int,int,bool*,bool*,bool*,bool*, bool*,bool * , bool *, bool *,
 		int *, string *, int*, player); 

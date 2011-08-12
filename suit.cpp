@@ -3,7 +3,7 @@
 suit::suit() // Shouldn't be used -- useless?
 {};
 
-int suit::howmanyofsuit(player & play)
+int howmanyofsuit(player & play)
 {
 	string suitname[4];
 	suitname[0] = "hearts";

@@ -1,5 +1,7 @@
 #include "headers.h"
 
+/// Files like this suck.....
+
 void otherbidding(int * ongoinptr, int, bool*);  // Bidding depending on their initial cards
 	
 int bidding(int * bidding_counter, bool * loop, int * ongoinprt, bool * playerbidding, player);

@@ -12,7 +12,7 @@ void play_hand(string winner, string suit, player & play, player & wplay, player
 
 	string playfirst;
 	
-	play.temporaryhack();
+	play.temporaryhack(); /// I would love to get rid of any hacks
 	wplay.temporaryhack();
 	nplay.temporaryhack();
 	eplay.temporaryhack(); 
@@ -116,7 +116,7 @@ void play_hand(string winner, string suit, player & play, player & wplay, player
 	void playersplay(player & play, card & a)
 	{
 			cout << endl << "Which card do you want to play?" << endl;
-			play.saycards();
+			play.saycards_in_hand();
 			int choice;
 			for(;;)
 			{

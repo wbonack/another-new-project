@@ -54,34 +54,37 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 
 	string ppassed1, ppassed2, ppassed3, ppassed4; //Names of the cards passed later
 	///The first call which tells the computer players their bids
+	
 	//The function that will give the players their score and allows the computerized players bid 
-	scoring_func(&playerpot, &westpot, &northpot, &eastpot, &westscore, &northscore, &eastscore, &playerscore, &play, &wplay, &nplay, &eplay);
+	
+	scoring_func( &westscore, &northscore, &eastscore, &playerscore, &play, &wplay, &nplay, &eplay);
 
 	bool westpass = false, northpass = false, eastpass = false, playerpass = false; // Booleans to see if the player passed
+	
 	int newcounter = 1, finalbid = 0; /// newcounter -- Used in bid() and bid.cpp functions, finalbid -- holds finalbid
 	
 	string winnername, suitname; // Makes the string that will hold the winner's name | suitname
 
-	suit heart("heart");
+	int howmanyofsuit(player &); ///In suit.cpp
 
 	//These return how many of each suit the players have -- Allows them to easily pick their best suit
-	 heart.howmanyofsuit(wplay);
-	 heart.howmanyofsuit(nplay);
-	 heart.howmanyofsuit(eplay);
+	howmanyofsuit(wplay);
+	howmanyofsuit(nplay);
+	howmanyofsuit(eplay);
 		
 	string westsuit;  // Holds the best suit for the players  // & playersuits(), bid()
 	string northsuit; // & playersuits(), bid()
 	string eastsuit;  // & playersuits(), bid()
 	
 	 //located in cards.cpp -- Decides the best suit
-	playersuits(&westsuit, &northsuit, &eastsuit, wplay, nplay, eplay);
+	playersuits( &westsuit, &northsuit, &eastsuit, wplay, nplay, eplay);
 
 	play.getorder();
 
-	bool continuetheforloop = true; // Used below to keep the loop going // & Used in bid, if statement
-	while(continuetheforloop == true) // Bidding Loop
+	bool continue_bidding = true; // Used below to keep the loop going // & Used in bid, if statement
+	while(continue_bidding == true) // Bidding Loop
 {	 
-	bid(westsuit, northsuit, eastsuit,&newcounter,&bidding_times, &continuetheforloop, &ongoin_bid, westpot , northpot, eastpot ,&playerpass, &westpass,&northpass,&eastpass,&westwin, &northwin, &eastwin, &playerwin, 
+	bid(westsuit, northsuit, eastsuit,&newcounter,&bidding_times, &continue_bidding, &ongoin_bid, westpot , northpot, eastpot ,&playerpass, &westpass,&northpass,&eastpass,&westwin, &northwin, &eastwin, &playerwin, 
 		&finalbid, &winnername, &suitint, play); 
 
 		if (suitint > 0)
@@ -104,11 +107,14 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 				break;
 			}
 		}
-		if ( westpass == true&&northpass == true&& eastpass == true){break;}
+		if ( westpass == true &&northpass == true && eastpass == true)
+		{
+			break;
+		}
 }
 
 	 /// The second call after all the bidding is over to scoring_func
-	scoring_func(&playerpot, &westpot, &northpot, &eastpot, &westscore, &northscore, &eastscore, &playerscore, &play, 
+	scoring_func( &westscore, &northscore, &eastscore, &playerscore, &play, 
 		&wplay, &nplay,&eplay);
 
 	bool firsttime = true; // Used to see if its the pass to the partner who won the deal or the pass back // & 2 x passing()
@@ -116,7 +122,8 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	///This will require knowing who are partners and then the passing probably will be quite difficult, but we will see.
 	passing(winnername,  &ppassed1, &ppassed2, &ppassed3, &ppassed4, &card_passed[0], &card_passed[1],&card_passed[2], 
 		&card_passed[3], &card_passed[4], &card_passed[5], &card_passed[6], &card_passed[7], &nplay, &wplay, &eplay, 
-		suitname, &firsttime, &play); // & Ideally these will take only player instances to make them work -- This code 
+		suitname, &firsttime, &play); 
+		// & Ideally these will take only player instances to make them work -- This code 
 		//looks like a project to simplify however.
 		// Rule: Make all your code as easy to read as possible when writing it... name it for what it does.
 
@@ -233,7 +240,7 @@ int finddealer(int * whoptr, string * dealer)
 			break;
 		}
 	case 4:
-		{bool continuetheforloop = true; // Used below to keep the loop going // & Used in bid, if statement
+		{
 			cout << "East is dealing" << endl;
 			*dealer = "East";
 			break;
@@ -258,6 +265,10 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 		3) Keep pinochles in mind when deciding / double runs although rare.
 	*/
 	
+	//First check if any are equal
+	
+		 
+	
 	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
 	{	*westsuit = "Hearts";	}
 
@@ -276,7 +287,6 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 	if (west_player.howmanyhearts == west_player.howmanydiamonds)
 	{
 		/// Check which suit has more power.
-		
 		
 	}
 	if (*westsuit != "Hearts" && *westsuit != "Diamonds" && *westsuit != "Spades" && *westsuit != "Clubs")

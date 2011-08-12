@@ -39,8 +39,6 @@ class suit // This replaced 4 classes I made earlier!!
 	std::string jackname;
 	std::string ninename;
 
-	int howmanyofsuit(player & play);
-
 	suit();
 	suit(string suitname);
 
@@ -101,16 +99,21 @@ class card
 public:
 	hand h;
 	std::string name;
+	
 	int suitnumber, order, secondsuit;
 	int orderplayed;
 	int power, number;
-	bool played, trump;
 	int suittofollow;
+	
+	bool played, trump;
+	
 	card whichwins(card &, card &, card &, card &); // Check this-- It might be broken
 	card(int);
 	card();
+	
 	void istrump(int); 
 	void fixorder(card &, card &, card &, card &, card &, card &, card &, card &, card &, card &, card &, card &);
+	
 	friend ostream &operator<<(ostream &os, card & c); //This makes me able to print it out to the screen 
 	bool operator ==(const card a){ return(a.number == number);}
 	bool operator <=(const card &a);
@@ -122,7 +125,7 @@ class player // & This should be documented so that the programmer understands a
 public:
 	int card1, card2, card3, card4, card5,card6,card7,card8, card9,card10,card11,card12;
 	
-	int * card1ptr; int * card2ptr; int * card3ptr; int * card4ptr;
+	int * card1ptr; int * card2ptr; int * card3ptr; int * card4ptr; // There has to be a better way....
 	int * card5ptr; int * card6ptr; int * card7ptr; int * card8ptr;
 	int * card9ptr; int * card10ptr; int * card11ptr; int * card12ptr;
 
@@ -140,6 +143,11 @@ public:
 	int howmanydiamonds;
 	int howmanyspades;
 	int howmanyclubs;
+	
+	int heartspower;
+	int diamondpower;
+	int spadepower;
+	int clubpower;
 
 	int choice;
 
@@ -150,11 +158,10 @@ public:
 
 	player();
 	player(int, int, int, int, int,int, int, int, int, int ,int, int);
-	void change(); // Used in passing.cpp in function cards_change_hands
+	void get_names(); // Used in passing.cpp in function cards_change_hands
 	void order(string, string, string, string, string, string, string, string, string, string, string, string);
 	void convert();
-	void saycards();
-	void cardpersuit();
+	void saycards_in_hand();
 	void temporaryhack(); 
 	void getorder();
 
