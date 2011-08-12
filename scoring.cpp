@@ -1,11 +1,8 @@
 #include "headers.h"
 
-void playersscore(int *,int westplayers1, int westplayers2, int westplayers3, int westplayers4,int westplayers5,
-	int westplayers6, int westplayers7,	int westplayers8, int westplayers9, int westplayers10, int westplayers11, 
-	int westplayers12);
+void playersscore(int *, player play);
 
-void sortcards(int *,int card1,int card2,int card3,int card4,int card5,int card6,int card7,int card8,int card9,
-	int card10, int card11,int card12,int *);
+void sortcards(int *,player play,int *);
 
 void scoring_func(int * pla, int * west,int * north,int * east, int * westpot, int * northpot, int * eastpot, int * playerpot, player * play,  player * wplay, player * nplay, player * eplay) 
 {	
@@ -16,44 +13,46 @@ void scoring_func(int * pla, int * west,int * north,int * east, int * westpot, i
 
 	*pla = 0,*west = 0, *north = 0, *east = 0;
 
-	playersscore(pla, pc.card1, pc.card2, pc.card3, pc.card4, pc.card5, pc.card6, pc.card7,pc.card8, pc.card9, 		
-		pc.card10, pc.card11,  pc.card12);
+	playersscore(pla, pc);
 
-	playersscore(west, wc.card1, wc.card2, wc.card3, wc.card4, wc.card5, wc.card6, wc.card7,wc.card8, wc.card9, 			wc.card10, wc.card11,  wc.card12);
+	playersscore(west, wc);
 	
-	playersscore(north, nc.card1, nc.card2, nc.card3, nc.card4, nc.card5, nc.card6, nc.card7,
-	 	nc.card8, nc.card9, nc.card10,nc.card11, nc.card12);
+	playersscore(north, nc);
 	
-	playersscore(east, ec.card1, ec.card2, ec.card3,  ec.card4, ec.card5, ec.card6, ec.card7, ec.card8, ec.card9, 
-		ec.card10, ec.card11, ec.card12);
+	playersscore(east, ec);
 
-	 *westpot = *west ;
+	 *westpot = *west;
 	 *northpot = *north;
 	 *eastpot = *east;
 	 *playerpot = *pla;
 }
 
-void playersscore(int * west,int westplayers1, int westplayers2, int westplayers3, int westplayers4,int westplayers5,
-	int westplayers6, int westplayers7, int westplayers8, int westplayers9, int westplayers10, int westplayers11,
-	int westplayers12)
+void playersscore(int * west, player play)
 {
-	scoring score;
+	int the_score; 
 	
-	int thescore; 
-	int * playerscore = &thescore;
-	
-	sortcards(west, westplayers1, westplayers2, westplayers3, westplayers4, westplayers5, westplayers6,  westplayers7,
-		westplayers8, westplayers9,  westplayers10,  westplayers11, westplayers12, playerscore);
+	sortcards(west, play, &the_score);
 }
 // This class is a quick hack I made to assign the boolean values to cards that were in the hand. --- This whole concept is quite messy....
 // In simplified language this takes the int value of the card and if it is equal to the card in the suit the boolean for that card is changed to true or ("yes i have it")
 // This is easier to read and saved about 10 lines totalll
 class trifecta
-		{  public: int x1; int * heart1; bool * heart1bool; trifecta(); void define_trifecta(int a, int * b , bool * c); void usetrifecta(int);};
+	{  
+		public: 
+			int x1; 
+			int * heart1; 
+			bool * heart1bool; 
+			void define_trifecta(int a, int * b , bool * c); 
+			void usetrifecta(int);
+	};
 
-		void trifecta::define_trifecta(int a, int * b , bool * c) { x1 = a; heart1 = b; heart1bool = c;}
-trifecta::trifecta()
-{}
+		void trifecta::define_trifecta(int a, int * b , bool * c) 
+		{ 
+			x1 = a; 
+			heart1 = b; 
+			heart1bool = c;
+		}
+
 void trifecta::usetrifecta(int card){ 
 while ( x1 < 13)
 		{
@@ -64,8 +63,7 @@ while ( x1 < 13)
 		}
 }
 
-void sortcards(int * biddingscore,int card1,int card2,int card3,int card4,int card5,int card6,int card7,int card8,
-			   int card9,int card10, int card11,int card12,int * playerscore)
+void sortcards(int * biddingscore,player play, int * playerscore)
 {
 	scoring score;
 	suit heart("heart");
@@ -78,18 +76,18 @@ void sortcards(int * biddingscore,int card1,int card2,int card3,int card4,int ca
 	bool donescoring = false;
 	while(donescoring == false)
 	{
-		if (counter == 1) { card = card1;}
-		if (counter == 2) { card = card2;}
-		if (counter == 3) { card = card3;}
-		if (counter == 4) { card = card4;}
-		if (counter == 5) { card = card5;}
-		if (counter == 6) { card = card6;}
-		if (counter == 7) { card = card7;}
-		if (counter == 8) { card = card8;}
-		if (counter == 9) { card = card9;}
-		if (counter == 10) { card = card10;}
-		if (counter == 11) { card = card11;}
-		if (counter == 12) { card = card12; donescoring = true;}
+		if (counter == 1) { card = play.card1;}
+		if (counter == 2) { card = play.card2;}
+		if (counter == 3) { card = play.card3;}
+		if (counter == 4) { card = play.card4;}
+		if (counter == 5) { card = play.card5;}
+		if (counter == 6) { card = play.card6;}
+		if (counter == 7) { card = play.card7;}
+		if (counter == 8) { card = play.card8;}
+		if (counter == 9) { card = play.card9;}
+		if (counter == 10) { card = play.card10;}
+		if (counter == 11) { card = play.card11;}
+		if (counter == 12) { card = play.card12; donescoring = true;}
 		if (counter >= 13)
 		{
 			cout << "Error in scoring. Counter >= 13." << endl;
@@ -182,7 +180,8 @@ void sortcards(int * biddingscore,int card1,int card2,int card3,int card4,int ca
 		}
 
 		if ((heart.ace1bool == true || heart.ace2bool == true)&&(heart.ten1bool == true|| heart.ten2bool == true)&&
-			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				true)&&(heart.jack1bool == true || heart.jack2bool == true))
+			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				
+			true)&&(heart.jack1bool == true || heart.jack2bool == true))
 		{
 			totalsofar += score.book;
 		}
@@ -249,35 +248,40 @@ void sortcards(int * biddingscore,int card1,int card2,int card3,int card4,int ca
 
 		bool spadebook = false;
 		if ((spade.ace1bool == true || spade.ace2bool == true)&&(spade.ten1bool == true|| spade.ten2bool == true)&&
-			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool != true&&spade.queen2bool != 				true)&&(spade.jack1bool == true || spade.jack2bool == true))
+			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool != true&&spade.queen2bool != 				
+			true)&&(spade.jack1bool == true || spade.jack2bool == true))
 		{
 			totalsofar += 10;
 			spadebook = true;
 		}
 
 		if (((spade.ace1bool == true || spade.ace2bool == true)&&(spade.ten1bool == true|| spade.ten2bool == true)&&
-			(spade.king1bool != true && spade.king2bool != true)&&(spade.queen1bool == true|| spade.queen2bool == 				true)&&(spade.jack1bool == true || spade.jack2bool == true))&&spadebook == false)
+			(spade.king1bool != true && spade.king2bool != true)&&(spade.queen1bool == true|| spade.queen2bool == 				
+			true)&&(spade.jack1bool == true || spade.jack2bool == true))&&spadebook == false)
 		{
 			totalsofar += 10;
 			spadebook = true;
 		}
 
 		if (((spade.ace1bool != true && spade.ace2bool != true)&&(spade.ten1bool == true|| spade.ten2bool == true)&&
-			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool == true|| spade.queen2bool == 				true)&&(spade.jack1bool == true || spade.jack2bool == true))&&spadebook == false)
+			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool == true|| spade.queen2bool == 				
+			true)&&(spade.jack1bool == true || spade.jack2bool == true))&&spadebook == false)
 		{
 			totalsofar += 10;
 			spadebook = true;
 		}
 
 		if (((spade.ace1bool == true || spade.ace2bool == true)&&(spade.ten1bool != true&& spade.ten2bool != true)&&
-			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool == true|| spade.queen2bool == 				true)&&(spade.jack1bool == true || spade.jack2bool == true))&&spadebook == false)
+			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool == true|| spade.queen2bool == 				
+			true)&&(spade.jack1bool == true || spade.jack2bool == true))&&spadebook == false)
 		{
 			totalsofar += 10;
 			spadebook = true;
 		}
 
 		if (((spade.ace1bool == true || spade.ace2bool == true)&&(spade.ten1bool == true|| spade.ten2bool == true)&&
-			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool == true|| spade.queen2bool == 				true)&&(spade.jack1bool != true && spade.jack2bool != true))&&spadebook == false)
+			(spade.king1bool == true || spade.king2bool == true)&&(spade.queen1bool == true|| spade.queen2bool == 				
+			true)&&(spade.jack1bool != true && spade.jack2bool != true))&&spadebook == false)
 		{
 			totalsofar += 10;
 			spadebook = true;
@@ -285,35 +289,40 @@ void sortcards(int * biddingscore,int card1,int card2,int card3,int card4,int ca
 
 		bool heartbook = false;
 		if ((heart.ace1bool == true || heart.ace2bool == true)&&(heart.ten1bool == true|| heart.ten2bool == true)&&
-			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool != true&&heart.queen2bool != 				true)&&(heart.jack1bool == true || heart.jack2bool == true))
+			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool != true&&heart.queen2bool != 				
+			true)&&(heart.jack1bool == true || heart.jack2bool == true))
 		{
 			totalsofar += 10;
 			heartbook = true;
 		}
 
 		if (((heart.ace1bool == true || heart.ace2bool == true)&&(heart.ten1bool == true|| heart.ten2bool == true)&&
-			(heart.king1bool != true && heart.king2bool != true)&&(heart.queen1bool == true|| heart.queen2bool == 				true)&&(heart.jack1bool == true || heart.jack2bool == true))&&heartbook == false)
+			(heart.king1bool != true && heart.king2bool != true)&&(heart.queen1bool == true|| heart.queen2bool == 				
+			true)&&(heart.jack1bool == true || heart.jack2bool == true))&&heartbook == false)
 		{
 			totalsofar += 10;
 			heartbook = true;
 		}
 
 		if (((heart.ace1bool != true && heart.ace2bool != true)&&(heart.ten1bool == true|| heart.ten2bool == true)&&
-			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				true)&&(heart.jack1bool == true || heart.jack2bool == true))&&heartbook == false)
+			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				
+			true)&&(heart.jack1bool == true || heart.jack2bool == true))&&heartbook == false)
 		{
 			totalsofar += 10;
 			heartbook = true;
 		}
 
 		if (((heart.ace1bool == true || heart.ace2bool == true)&&(heart.ten1bool != true&& heart.ten2bool != true)&&
-			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				true)&&(heart.jack1bool == true || heart.jack2bool == true))&&heartbook == false)
+			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				
+			true)&&(heart.jack1bool == true || heart.jack2bool == true))&&heartbook == false)
 		{
 			totalsofar += 10;
 			heartbook = true;
 		}
 
 		if (((heart.ace1bool == true || heart.ace2bool == true)&&(heart.ten1bool == true|| heart.ten2bool == true)&&
-			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				true)&&(heart.jack1bool != true && heart.jack2bool != true))&&heartbook == false)
+			(heart.king1bool == true || heart.king2bool == true)&&(heart.queen1bool == true|| heart.queen2bool == 				
+			true)&&(heart.jack1bool != true && heart.jack2bool != true))&&heartbook == false)
 		{
 			totalsofar += 10;
 			heartbook = true;

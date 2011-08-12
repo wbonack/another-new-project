@@ -23,7 +23,7 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	cout << "! # " << hand_counter << " !" << endl; 
 	cout << "-------" << endl;
 		
-	string dealer;   
+	string dealer;
 	finddealer(&hand_counter, &dealer);  /// in hand.cpp
 
 	player play = recieve_cards(1); 
