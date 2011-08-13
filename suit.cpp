@@ -13,9 +13,10 @@ int howmanyofsuit(player & play)
 	suitname[3] = "clubs";
 	
 	int cardspersuit[4];
+	int powerpersuit[4];
 	void zero_out_array(int array_size, int * array_pointer);
 	zero_out_array(4, &cardspersuit[0]);
-	
+	zero_out_array(4, &powerpersuit[0]);
 	int thecounter = 0;
 	while (thecounter < 4)
 {	
@@ -46,58 +47,70 @@ int howmanyofsuit(player & play)
 	
 	bool part_of_suit(int player_card, int number_lower_limit, int number_upper_limit);
 	
-	int x = 0;
+	int x = 0, power = 0;
 	if (part_of_suit(play.card1, number_lower_limit, number_upper_limit))
 	{
+		power += play.first1.power; 
 		x++;
 	}
 	if (part_of_suit(play.card2, number_lower_limit, number_upper_limit))
 	{
+		power += play.second1.power;
 		x++;
 	}
 	if (part_of_suit(play.card3, number_lower_limit, number_upper_limit))
 	{
+		power += play.third1.power;
 		x++;
 	}
 	if (part_of_suit(play.card4, number_lower_limit, number_upper_limit))
 	{
+		power += play.fourth1.power;
 		x++;
 	}
 	if (part_of_suit(play.card5, number_lower_limit, number_upper_limit))
 	{
+		power += play.fifth1.power;
 		x++;
 	}
 	if (part_of_suit(play.card6, number_lower_limit, number_upper_limit))
 	{
+		power += play.sixth1.power;
 		x++;
 	}
 	if (part_of_suit(play.card7, number_lower_limit, number_upper_limit))
 	{
+		power += play.seventh1.power;
 		x++;
 	}
 	if (part_of_suit(play.card8, number_lower_limit, number_upper_limit))
 	{
+		power += play.eight1.power;
 		x++;
 	}
 	if (part_of_suit(play.card9, number_lower_limit, number_upper_limit))
 	{
+		power += play.ninth1.power;
 		x++;
 	}
 	if (part_of_suit(play.card10, number_lower_limit, number_upper_limit))
 	{
+		power += play.tenth1.power;
 		x++;
 	}
 	if (part_of_suit(play.card11, number_lower_limit, number_upper_limit))
 	{
+		power += play.eleventh1.power;
 		x++;
 	}
 	if (part_of_suit(play.card12, number_lower_limit, number_upper_limit))
 	{
+		power += play.twelth1.power;
 		x++;
 	}
 	
 	cardspersuit[thecounter] = x;
-
+	powerpersuit[thecounter] = power;
 	thecounter++;
 }
 
@@ -106,6 +119,11 @@ play.howmanyhearts = cardspersuit[0];
 play.howmanydiamonds = cardspersuit[1];
 play.howmanyspades = cardspersuit[2];
 play.howmanyclubs = cardspersuit[3];
+
+play.heartspower = powerpersuit[0];
+play.diamondspower = powerpersuit[1];
+play.spadespower = powerpersuit[2];
+play.clubspower = powerpersuit[3];
 
 return 0;
 }

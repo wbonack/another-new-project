@@ -145,9 +145,9 @@ public:
 	int howmanyclubs;
 	
 	int heartspower;
-	int diamondpower;
-	int spadepower;
-	int clubpower;
+	int diamondspower;
+	int spadespower;
+	int clubspower;
 
 	int choice;
 

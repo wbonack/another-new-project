@@ -264,40 +264,79 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 		2) Pick the suit with the most powerful cards / best chance at winning the hand.
 		3) Keep pinochles in mind when deciding / double runs although rare.
 	*/
-	int x = 1, y = 0;
+	int x = 1;
 	int howmanyplace[4];
+	zero_out_array(4, &howmanyplace[0]);
 	
 	//First check if any can be easily eliminated
 	if (west_player.howmanyhearts < 3) 
 	{
-		howmanyplace[y] = x; 
-		x++, y++;
+		howmanyplace[0] = x; 
+		x++;
 	}
 	if (west_player.howmanydiamonds < 3) 
 	{
-		howmanyplace[y] = x; 
-		x++, y++;
+		howmanyplace[1] = x; 
+		x++;
 	}
 	if (west_player.howmanyspades < 3) 
 	{
-		howmanyplace[y] = x; 
-		x++, y++;
+		howmanyplace[2] = x; 
+		x++;
 	}
 	if (west_player.howmanyclubs < 3) 
 	{
-		howmanyplace[y] = x; 
-		x++, y++;
+		howmanyplace[3] = x; 
+		x++;
 	}	
 	ofstream outplayer1("playersuitsdebugging.txt");
 	outplayer1 << "X is: " <<  x << endl;
 	outplayer1 <<  "hearts: " << west_player.howmanyhearts << endl;
+	outplayer1 << "hearts power: " << west_player.heartspower << endl;
 	outplayer1 <<  "diamonds: " << west_player.howmanydiamonds << endl;
+	outplayer1 << "diamonds power: " << west_player.diamondspower << endl;
 	outplayer1 <<  "spades: " << west_player.howmanyspades << endl;
+	outplayer1 << "spades power: " << west_player.spadespower << endl;
 	outplayer1 <<  "clubs: " << west_player.howmanyclubs << endl;
-	outplayer1 << x -1 << " can be eliminated from consideration." << endl;
-	outplayer1.close();
+	outplayer1 << "clubs power: " << west_player.clubspower << endl;
+	
+	outplayer1 << "howmanyplace[0] is: " << howmanyplace[0] << endl;
+	outplayer1 << "howmanyplace[1] is: " << howmanyplace[1] << endl;
+	outplayer1 << "howmanyplace[2] is: " << howmanyplace[2] << endl;
+	outplayer1 << "howmanyplace[3] is: " << howmanyplace[3] << endl;
+	
+	outplayer1 << x - 1 << " can be eliminated from consideration." << endl;
 	
 	
+	if(howmanyplace[0] == 0 ) // If hearts is not eliminated
+	{
+		float suitworth1 = west_player.heartspower/ west_player.howmanyhearts;
+		suitworth1 = suitworth1 - west_player.howmanyhearts * .75;
+		outplayer1 << "suitworth of hearts: " << suitworth1 << endl;
+	}
+	
+	if(howmanyplace[1] == 0 ) // If diamonds is not eliminated
+	{
+		float suitworth2 = west_player.diamondspower/ west_player.howmanydiamonds;
+		suitworth2 = suitworth2 - west_player.howmanydiamonds * .75;
+		outplayer1 << "suitworth of hearts: " << suitworth2 << endl;
+	}
+	
+	if(howmanyplace[2] == 0 ) // If diamonds is not eliminated
+	{
+		float suitworth3 = west_player.diamondspower/ west_player.howmanydiamonds;
+		suitworth3 = suitworth3 - west_player.howmanydiamonds * .75;
+		outplayer1 << "suitworth of hearts: " << suitworth3 << endl;
+	}
+	
+	if(howmanyplace[3] == 0 ) // If diamonds is not eliminated
+	{
+		float suitworth4 = west_player.diamondspower/ west_player.howmanydiamonds;
+		suitworth4 = suitworth4 - west_player.howmanydiamonds * .75;
+		outplayer1 << "suitworth of hearts: " << suitworth4 << endl;
+	}
+	
+	outplayer1.close();	
 	
 	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
 	{	*westsuit = "Hearts";	}
