@@ -264,10 +264,40 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 		2) Pick the suit with the most powerful cards / best chance at winning the hand.
 		3) Keep pinochles in mind when deciding / double runs although rare.
 	*/
+	int x = 1, y = 0;
+	int howmanyplace[4];
 	
-	//First check if any are equal
+	//First check if any can be easily eliminated
+	if (west_player.howmanyhearts < 3) 
+	{
+		howmanyplace[y] = x; 
+		x++, y++;
+	}
+	if (west_player.howmanydiamonds < 3) 
+	{
+		howmanyplace[y] = x; 
+		x++, y++;
+	}
+	if (west_player.howmanyspades < 3) 
+	{
+		howmanyplace[y] = x; 
+		x++, y++;
+	}
+	if (west_player.howmanyclubs < 3) 
+	{
+		howmanyplace[y] = x; 
+		x++, y++;
+	}	
+	ofstream outplayer1("playersuitsdebugging.txt");
+	outplayer1 << "X is: " <<  x << endl;
+	outplayer1 <<  "hearts: " << west_player.howmanyhearts << endl;
+	outplayer1 <<  "diamonds: " << west_player.howmanydiamonds << endl;
+	outplayer1 <<  "spades: " << west_player.howmanyspades << endl;
+	outplayer1 <<  "clubs: " << west_player.howmanyclubs << endl;
+	outplayer1 << x -1 << " can be eliminated from consideration." << endl;
+	outplayer1.close();
 	
-		 
+	
 	
 	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
 	{	*westsuit = "Hearts";	}
@@ -283,12 +313,14 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 	
 	ofstream out("error.txt");
 	out << "West power is: " << west_player.first1.power << endl;
-	out.close();
+	
 	if (west_player.howmanyhearts == west_player.howmanydiamonds)
 	{
-		/// Check which suit has more power.
+		
 		
 	}
+	
+	out.close();
 	if (*westsuit != "Hearts" && *westsuit != "Diamonds" && *westsuit != "Spades" && *westsuit != "Clubs")
 	{
 		//if (west_clubs == west_diamonds || west_diamonds == west_hearts 

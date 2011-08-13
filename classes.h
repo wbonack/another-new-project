@@ -123,7 +123,7 @@ class player // & This should be documented so that the programmer understands a
 	// & This looks a bit lazy in that their are mostly public declarations and not many private/protected
 {
 public:
-	int card1, card2, card3, card4, card5,card6,card7,card8, card9,card10,card11,card12;
+	int card1, card2, card3, card4, card5,card6,card7,card8, card9,card10,card11, card12;
 	
 	int * card1ptr; int * card2ptr; int * card3ptr; int * card4ptr; // There has to be a better way....
 	int * card5ptr; int * card6ptr; int * card7ptr; int * card8ptr;

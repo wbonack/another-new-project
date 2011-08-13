@@ -5,6 +5,7 @@ suit::suit() // Shouldn't be used -- useless?
 
 int howmanyofsuit(player & play)
 {
+	
 	string suitname[4];
 	suitname[0] = "hearts";
 	suitname[1] = "diamonds";
@@ -12,6 +13,8 @@ int howmanyofsuit(player & play)
 	suitname[3] = "clubs";
 	
 	int cardspersuit[4];
+	void zero_out_array(int array_size, int * array_pointer);
+	zero_out_array(4, &cardspersuit[0]);
 	
 	int thecounter = 0;
 	while (thecounter < 4)
@@ -20,41 +23,84 @@ int howmanyofsuit(player & play)
 		
 	if (suitname[thecounter] == "hearts")
 	{	
-		number_lower_limit = 0, number_lower_limit = 13;
+		number_lower_limit = 0, number_upper_limit = 13;
 	}
 	if (suitname[thecounter] == "diamonds" )
 	{	
-		number_lower_limit = 12, number_lower_limit = 25;
+		number_lower_limit = 12, number_upper_limit = 25;
 	}
 	if (suitname[thecounter] == "spades" )
 	{       
-		number_lower_limit = 24, number_lower_limit = 37;
+		number_lower_limit = 24, number_upper_limit = 37;
 	}
 	if (suitname[thecounter] == "clubs" )
 	{	
-		number_lower_limit = 36, number_lower_limit = 49;
+		number_lower_limit = 36, number_upper_limit = 49;
 	}
-	if (number_lower_limit == -1) /// Error check
+	if (number_lower_limit == -1 || number_upper_limit == -1) /// Error check
 	{
 			ofstream out("error.txt");
-			out << "Suit.cpp line 29 error: 'Number lower limit not defined by any case'" << endl;
+			out << "Suit.cpp line 40 error: 'Number lower limit not defined by any case'" << endl;
 			out.close();
 	}
 	
-	int x = 0, counter = 0;
-	int * card_pointer =  &play.card1; 
-	while (counter < 12)
+	bool part_of_suit(int player_card, int number_lower_limit, int number_upper_limit);
+	
+	int x = 0;
+	if (part_of_suit(play.card1, number_lower_limit, number_upper_limit))
 	{
-		if (*card_pointer > number_lower_limit && *card_pointer < number_upper_limit)
-		{
-			x++;
-		}
-		card_pointer++;
-		counter++;
-	} 
+		x++;
+	}
+	if (part_of_suit(play.card2, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card3, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card4, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card5, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card6, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card7, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card8, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card9, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card10, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card11, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	if (part_of_suit(play.card12, number_lower_limit, number_upper_limit))
+	{
+		x++;
+	}
+	
 	cardspersuit[thecounter] = x;
+
 	thecounter++;
 }
+
 
 play.howmanyhearts = cardspersuit[0];
 play.howmanydiamonds = cardspersuit[1];
@@ -64,6 +110,17 @@ play.howmanyclubs = cardspersuit[3];
 return 0;
 }
 
+bool part_of_suit(int player_card, int number_lower_limit, int number_upper_limit)
+{
+	if (player_card > number_lower_limit && player_card < number_upper_limit)
+		{
+			return true;
+		}
+	else
+		{
+			return false;
+		}
+}
 
 suit::suit(std::string suitname)
 {
