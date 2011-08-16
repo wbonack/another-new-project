@@ -1,4 +1,4 @@
-int finddealer(int * whoptr, string *);
+int finddealer(int & whoptr, string &);
 
 player recieve_cards(int player_number);
 //located in recieve_cards

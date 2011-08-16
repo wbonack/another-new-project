@@ -24,7 +24,7 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	cout << "-------" << endl;
 		
 	string dealer;
-	finddealer(&hand_counter, &dealer);  /// in hand.cpp
+	finddealer(hand_counter, dealer);  /// in hand.cpp
 
 	player play = recieve_cards(1); 
 
@@ -212,9 +212,9 @@ void srand_()
 	srand((unsigned)time(NULL));
 }
 
-int finddealer(int * whoptr, string * dealer)
+int finddealer(int & whoptr, string & dealer)
 {
-	int local_counter = *whoptr;
+	int local_counter = whoptr;
 	while (local_counter > 4)
 	{
 		local_counter -=  4;
@@ -224,25 +224,25 @@ int finddealer(int * whoptr, string * dealer)
 	case 1: 
 		{
 			cout << "You are the dealer." << endl;
-			*dealer = "Player";
+			dealer = "Player";
 			break;
 		}
 	case 2:
 		{
 			cout << "West is dealing" << endl;
-			*dealer = "West";
+			dealer = "West";
 			break;
 		}
 	case 3: 
 		{
 			cout << "North is dealing" << endl;
-			*dealer = "North" ;
+			dealer = "North" ;
 			break;
 		}
 	case 4:
 		{
 			cout << "East is dealing" << endl;
-			*dealer = "East";
+			dealer = "East";
 			break;
 		}
 	default:
@@ -250,7 +250,7 @@ int finddealer(int * whoptr, string * dealer)
 			cout << "I don't know who is dealing --- This is an error!" << endl;
 		}
 	}
-return *whoptr;
+return whoptr;
 }
 
 
@@ -301,41 +301,109 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 	outplayer1 << "clubs power: " << west_player.clubspower << endl;
 	
 	outplayer1 << "howmanyplace[0] is: " << howmanyplace[0] << endl;
+	
 	outplayer1 << "howmanyplace[1] is: " << howmanyplace[1] << endl;
 	outplayer1 << "howmanyplace[2] is: " << howmanyplace[2] << endl;
 	outplayer1 << "howmanyplace[3] is: " << howmanyplace[3] << endl;
 	
 	outplayer1 << x - 1 << " can be eliminated from consideration." << endl;
 	
+	double a = 7,b = 7,c = 7,d = 7;
+	
 	
 	if(howmanyplace[0] == 0 ) // If hearts is not eliminated
 	{
-		float suitworth1 = west_player.heartspower/ west_player.howmanyhearts;
-		suitworth1 = suitworth1 - west_player.howmanyhearts * .75;
+		//cout << endl << west
+		double suitworth1 = (west_player.heartspower / west_player.howmanyhearts);
+		outplayer1 << "suitworth 1st operation! " << suitworth1 << endl;
+		suitworth1 = suitworth1 - (west_player.howmanyhearts -1 ) * .75;
 		outplayer1 << "suitworth of hearts: " << suitworth1 << endl;
+		a = suitworth1;
 	}
 	
 	if(howmanyplace[1] == 0 ) // If diamonds is not eliminated
 	{
-		float suitworth2 = west_player.diamondspower/ west_player.howmanydiamonds;
-		suitworth2 = suitworth2 - west_player.howmanydiamonds * .75;
-		outplayer1 << "suitworth of hearts: " << suitworth2 << endl;
+		double suitworth2 = (west_player.diamondspower / west_player.howmanydiamonds);
+		outplayer1 << "suitworth 1st operation! " << suitworth2 << endl;
+		suitworth2 = suitworth2 - (west_player.howmanydiamonds -1 ) * .75;
+		outplayer1 << "suitworth of diamonds: " << suitworth2 << endl;
+		b = suitworth2;
 	}
 	
-	if(howmanyplace[2] == 0 ) // If diamonds is not eliminated
+	if(howmanyplace[2] == 0 ) // If spades is not eliminated
 	{
-		float suitworth3 = west_player.diamondspower/ west_player.howmanydiamonds;
-		suitworth3 = suitworth3 - west_player.howmanydiamonds * .75;
-		outplayer1 << "suitworth of hearts: " << suitworth3 << endl;
+		double suitworth3 = (west_player.spadespower / west_player.howmanyspades);
+		outplayer1 << "suitworth 1st operation! " << suitworth3 << endl;
+		suitworth3 = suitworth3 - (west_player.howmanyspades - 1) * .75;
+		outplayer1 << "suitworth of spades: " << suitworth3 << endl;
+		c = suitworth3;
 	}
 	
-	if(howmanyplace[3] == 0 ) // If diamonds is not eliminated
+	if(howmanyplace[3] == 0 ) // If clubs is not eliminated
 	{
-		float suitworth4 = west_player.diamondspower/ west_player.howmanydiamonds;
-		suitworth4 = suitworth4 - west_player.howmanydiamonds * .75;
-		outplayer1 << "suitworth of hearts: " << suitworth4 << endl;
+		double suitworth4 = (west_player.clubspower / west_player.howmanyclubs);
+		outplayer1 << "suitworth 1st operation! " << suitworth4 << endl;
+		suitworth4 = suitworth4 - (west_player.howmanyclubs - 1) * .75;
+		outplayer1 << "suitworth of clubs: " << suitworth4 << endl;
+		d = suitworth4;
 	}
 	
+	bool itworked = false;
+	
+	if(a != 7 && (a < b && a < c && a < d)) // Doesn't account for equality
+	{
+		outplayer1 << "Suit hearts was picked!" << endl;
+		*westsuit = "Hearts";
+		itworked = true;
+	}
+	
+	if(b != 7 && (b < a && b < c && b < d)) // Doesn't account for equality
+	{
+		outplayer1 << "Suit diamonds was picked!" << endl;
+		*westsuit = "Diamonds";
+		itworked = true;
+	}
+	
+	if(c != 7 && (c < b && c < a && c < d)) // Doesn't account for equality
+	{
+		outplayer1 << "Suit spades was picked!" << endl;
+		*westsuit = "Spades";
+		itworked = true;
+	}
+	
+	if(d != 7 && (d < b && d < c && d < a)) // Doesn't account for equality
+	{
+		outplayer1 << "Suit clubs was picked!" << endl;
+		*westsuit = "Clubs";
+		itworked = true;
+	}
+	if (itworked == false)
+	{
+		outplayer1 << "Itworked is false! Last chance to declare suit." << endl;
+		// These take it down to two for sure.  Will finish this if there is ever a need.
+		if (a != 7 && (a <= b && a <= c && a <= d))
+		{
+			
+		}
+		if (b != 7 && (b <= a && b <= c && b <= d))
+		{
+			
+		}
+		if (c != 7 && (c <= b && c <= a && c <= d))
+		{
+			
+		}
+		if (d != 7 && (a <= b && d <= c && d <= a))
+		{
+			
+		}
+		*westsuit = "Hearts"; // This is cheating, I think other functions need to be developed before I finish this.  It is much more complete now.
+		/// Specifically I am looking for something that checks for pinochles and meld so they can see which hand is better for them.
+	}
+	
+	
+	
+		
 	outplayer1.close();	
 	
 	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
