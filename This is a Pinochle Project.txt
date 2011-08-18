@@ -120,8 +120,12 @@ June 12th, 2010 - I fixed a problem in bid.cpp with the bidding_func()
 
 June 13th, 2010 - I am down to 26 files!! I deleted cards.cpp and cards_being_passed.cpp !!
 
-August 8th, 2010 - Picked up this project after a year of neglect.  Let's see if I can fix this and get it working flawlessly finally.
+August 8th, 2011 - Picked up this project after a year of neglect.  Let's see if I can fix this and get it working flawlessly finally.
 		- What I have noticed is that my program has a lot of crap.  To future self: Write beautiful the first time.
+
+August 17th, 2011 - I have spent a bit of time over the last couple weeks looking at the code and I think that along with getting a completely working program I will try to get rid of all pointers
+and change them to references.  This will make the port from C++ to C# GUI a lot easier and allow a thorough logic system to already be in place.  The goal I have for this program now is not learning
+but making something I can sell a few copies of and make some profit from my efforts.  I have learned a lot and hopefully I can make some money from my efforts.
 
 TODO: Lots of Work
  * Check if the dealing part switches properly **** More complete - August 29th
@@ -144,6 +148,7 @@ TODO: Lots of Work
 	* TODO: Work on GUI... learn more about that kind of programming
 	* TODO: Work through every function and report what it does -- // & This is what I am doing now!!
 	* TODO: Change the bidding order so the West player is after the player when bidding // & I caught that later -- but thanks for the heads up self
+	* TODO: Change all pointers to references and make functions with pointer "magic" work.
 
  * Finish bidding, started some players, but they are not complete
  
@@ -236,9 +241,6 @@ cout << card1 << " , " << card2 << " , " << card3 << " , " << card4 << " , " << 
 
 
 */
-
-
-
 
 /*
 	///Below is a quick test ... I will keep this just in case for the future

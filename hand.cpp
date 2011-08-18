@@ -4,7 +4,9 @@
 #include "scoreclass.h"
 #include "hand.h"
 
-void zero_out_array(int array_size, int * array) 
+
+
+void zero_out_array(int array_size, int * array) /// C# pointer problem fixed here.
 {
 int array_element = 0;
 while (array_element < array_size)
@@ -13,7 +15,7 @@ while (array_element < array_size)
 		array_element++;
 		array++;
 	}
-}
+} // For C# this will be Array.clear()
 
 void deal(int hand_counter, scoreclass & scr) /// Change howmany to something that makes sense
 {
@@ -76,8 +78,8 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	string northsuit; // & playersuits(), bid()
 	string eastsuit;  // & playersuits(), bid()
 	
-	 //located in cards.cpp -- Decides the best suit
-	playersuits( &westsuit, &northsuit, &eastsuit, wplay, nplay, eplay);
+	 //located in hand.cpp -- Decides the best suit
+	playersuits( westsuit, northsuit, eastsuit, wplay, nplay, eplay);
 
 	play.getorder();
 
@@ -119,22 +121,24 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 
 	bool firsttime = true; // Used to see if its the pass to the partner who won the deal or the pass back // & 2 x passing()
 	
+	/// Passing is ugly and should only require one function that is 100 times simpler than this one.
+	
 	///This will require knowing who are partners and then the passing probably will be quite difficult, but we will see.
 	passing(winnername,  &ppassed1, &ppassed2, &ppassed3, &ppassed4, &card_passed[0], &card_passed[1],&card_passed[2], 
-		&card_passed[3], &card_passed[4], &card_passed[5], &card_passed[6], &card_passed[7], &nplay, &wplay, &eplay, 
-		suitname, &firsttime, &play); 
+		&card_passed[3], &card_passed[4], &card_passed[5], &card_passed[6], &card_passed[7], nplay, wplay, eplay, play,
+		suitname,  &firsttime); 
 		// & Ideally these will take only player instances to make them work -- This code 
 		//looks like a project to simplify however.
 		// Rule: Make all your code as easy to read as possible when writing it... name it for what it does.
 
 	passing(winnername, &ppassed1, &ppassed2, &ppassed3, &ppassed4, &card_passed[4], &card_passed[5],&card_passed[6], 
-		&card_passed[7], &card_passed[0], &card_passed[1], &card_passed[2], &card_passed[3], &nplay, &wplay, &eplay, 
-		suitname, &firsttime, &play);
+		&card_passed[7], &card_passed[0], &card_passed[1], &card_passed[2], &card_passed[3], nplay, wplay, eplay, play,
+		suitname,   &firsttime);
 	
 	cardschangehands(winnername, &card_passed[0], &card_passed[1], &card_passed[2],&card_passed[3],&card_passed
 		[4],&card_passed[5],&card_passed[6],&card_passed[7], &play, &wplay, &nplay, &eplay);
 
-	play.getorder();
+	play.getorder(); /// Why do these need to be called?
 	
 	wplay.getorder(); 
 
@@ -254,41 +258,49 @@ return whoptr;
 }
 
 
-void playersuits(string * westsuit, string * northsuit, string * eastsuit, player west_player, player north_player, player east_player) 
+void playersuits(string & westsuit, string & northsuit, string & eastsuit, player & west_player, player & north_player, player & east_player) 
 				 /// This is confusing: TODO: Clean this so it makes sense/ check if it even works
 {
-	/// This is a hack and doesn't really pick the best suit for the opposing player.  
+	void pick_suit_logic(player & west_player, string & westsuit);
 	
-	/* To find the best suit:
-		1) Find the suit with the most cards
-		2) Pick the suit with the most powerful cards / best chance at winning the hand.
-		3) Keep pinochles in mind when deciding / double runs although rare.
-	*/
-	int x = 1;
-	int howmanyplace[4];
-	zero_out_array(4, &howmanyplace[0]);
+	pick_suit_logic(west_player, westsuit);
+	
+	pick_suit_logic(north_player, northsuit);
+
+	pick_suit_logic(east_player, eastsuit);
+}
+
+void pick_suit_logic(player & west_player, string & westsuit)
+{
+		/// This uses the west_player as a prototype and picks the best suit for the players. 
+	int x = 1; // x - 1 is the number of suits eliminated by the first check.
+	int suit[4];
+	zero_out_array(4, &suit[0]); 
 	
 	//First check if any can be easily eliminated
+	//Adds a value to the howmanyplace array if there are less than 3 cards in a suit.
 	if (west_player.howmanyhearts < 3) 
 	{
-		howmanyplace[0] = x; 
+		suit[0] = x; 
 		x++;
 	}
 	if (west_player.howmanydiamonds < 3) 
 	{
-		howmanyplace[1] = x; 
+		suit[1] = x; 
 		x++;
 	}
 	if (west_player.howmanyspades < 3) 
 	{
-		howmanyplace[2] = x; 
+		suit[2] = x; 
 		x++;
 	}
 	if (west_player.howmanyclubs < 3) 
 	{
-		howmanyplace[3] = x; 
+		suit[3] = x; 
 		x++;
 	}	
+	
+	
 	ofstream outplayer1("playersuitsdebugging.txt");
 	outplayer1 << "X is: " <<  x << endl;
 	outplayer1 <<  "hearts: " << west_player.howmanyhearts << endl;
@@ -300,176 +312,122 @@ void playersuits(string * westsuit, string * northsuit, string * eastsuit, playe
 	outplayer1 <<  "clubs: " << west_player.howmanyclubs << endl;
 	outplayer1 << "clubs power: " << west_player.clubspower << endl;
 	
-	outplayer1 << "howmanyplace[0] is: " << howmanyplace[0] << endl;
+	outplayer1 << "suit[0] is: " << suit[0] << endl; // If this is greater than 0 the suit is eliminated from consideration.
 	
-	outplayer1 << "howmanyplace[1] is: " << howmanyplace[1] << endl;
-	outplayer1 << "howmanyplace[2] is: " << howmanyplace[2] << endl;
-	outplayer1 << "howmanyplace[3] is: " << howmanyplace[3] << endl;
+	outplayer1 << "suit[1] is: " << suit[1] << endl;
+	outplayer1 << "suit[2] is: " << suit[2] << endl;
+	outplayer1 << "suit[3] is: " << suit[3] << endl;
 	
 	outplayer1 << x - 1 << " can be eliminated from consideration." << endl;
 	
-	double a = 7,b = 7,c = 7,d = 7;
+	double suitworth_hearts = 7,suitworth_diamonds = 7,suitworth_spades = 7,suitworth_clubs = 7;
+	// The 7s allow me to rule out the eliminated suits.
 	
-	
-	if(howmanyplace[0] == 0 ) // If hearts is not eliminated
+	if(suit[0] == 0 ) // If hearts is not eliminated
 	{
-		//cout << endl << west
-		double suitworth1 = (west_player.heartspower / west_player.howmanyhearts);
+		double suitworth1 = ((double)west_player.heartspower / west_player.howmanyhearts);
 		outplayer1 << "suitworth 1st operation! " << suitworth1 << endl;
-		suitworth1 = suitworth1 - (west_player.howmanyhearts -1 ) * .75;
+		suitworth1 = suitworth1 - (west_player.howmanyhearts - 1 ) * .75;
 		outplayer1 << "suitworth of hearts: " << suitworth1 << endl;
-		a = suitworth1;
+		suitworth_hearts = suitworth1;
 	}
 	
-	if(howmanyplace[1] == 0 ) // If diamonds is not eliminated
+	if(suit[1] == 0 ) // If diamonds is not eliminated
 	{
-		double suitworth2 = (west_player.diamondspower / west_player.howmanydiamonds);
+		double suitworth2 = ((double)west_player.diamondspower / west_player.howmanydiamonds);
 		outplayer1 << "suitworth 1st operation! " << suitworth2 << endl;
 		suitworth2 = suitworth2 - (west_player.howmanydiamonds -1 ) * .75;
 		outplayer1 << "suitworth of diamonds: " << suitworth2 << endl;
-		b = suitworth2;
+		suitworth_diamonds = suitworth2;
 	}
 	
-	if(howmanyplace[2] == 0 ) // If spades is not eliminated
+	if(suit[2] == 0 ) // If spades is not eliminated
 	{
-		double suitworth3 = (west_player.spadespower / west_player.howmanyspades);
+		double suitworth3 = ((double)west_player.spadespower / west_player.howmanyspades);
 		outplayer1 << "suitworth 1st operation! " << suitworth3 << endl;
 		suitworth3 = suitworth3 - (west_player.howmanyspades - 1) * .75;
 		outplayer1 << "suitworth of spades: " << suitworth3 << endl;
-		c = suitworth3;
+		suitworth_spades = suitworth3;
 	}
 	
-	if(howmanyplace[3] == 0 ) // If clubs is not eliminated
+	if(suit[3] == 0 ) // If clubs is not eliminated
 	{
-		double suitworth4 = (west_player.clubspower / west_player.howmanyclubs);
+		double suitworth4 = ((double)west_player.clubspower / west_player.howmanyclubs);
 		outplayer1 << "suitworth 1st operation! " << suitworth4 << endl;
 		suitworth4 = suitworth4 - (west_player.howmanyclubs - 1) * .75;
 		outplayer1 << "suitworth of clubs: " << suitworth4 << endl;
-		d = suitworth4;
+		suitworth_clubs = suitworth4;
 	}
 	
 	bool itworked = false;
 	
-	if(a != 7 && (a < b && a < c && a < d)) // Doesn't account for equality
+	if(suitworth_hearts != 7 && (suitworth_hearts < suitworth_diamonds && suitworth_hearts < suitworth_spades
+	 && suitworth_hearts < suitworth_clubs)) 
 	{
 		outplayer1 << "Suit hearts was picked!" << endl;
-		*westsuit = "Hearts";
+		westsuit = "Hearts";
 		itworked = true;
 	}
 	
-	if(b != 7 && (b < a && b < c && b < d)) // Doesn't account for equality
+	if(suitworth_diamonds != 7 && (suitworth_diamonds < suitworth_hearts && suitworth_diamonds < suitworth_spades 
+		&& suitworth_diamonds < suitworth_clubs))
 	{
 		outplayer1 << "Suit diamonds was picked!" << endl;
-		*westsuit = "Diamonds";
+		westsuit = "Diamonds";
 		itworked = true;
 	}
 	
-	if(c != 7 && (c < b && c < a && c < d)) // Doesn't account for equality
+	if(suitworth_spades != 7 && (suitworth_spades < suitworth_diamonds && suitworth_spades < suitworth_hearts 
+	&& suitworth_spades < suitworth_clubs)) 
 	{
 		outplayer1 << "Suit spades was picked!" << endl;
-		*westsuit = "Spades";
+		westsuit = "Spades";
 		itworked = true;
 	}
 	
-	if(d != 7 && (d < b && d < c && d < a)) // Doesn't account for equality
+	if(suitworth_clubs != 7 && (suitworth_clubs < suitworth_diamonds && suitworth_clubs < suitworth_spades 
+	&& suitworth_clubs < suitworth_hearts)) 
 	{
 		outplayer1 << "Suit clubs was picked!" << endl;
-		*westsuit = "Clubs";
+		westsuit = "Clubs";
 		itworked = true;
 	}
 	if (itworked == false)
 	{
 		outplayer1 << "Itworked is false! Last chance to declare suit." << endl;
-		// These take it down to two for sure.  Will finish this if there is ever a need.
-		if (a != 7 && (a <= b && a <= c && a <= d))
+		// These take it down to two for sure.  Will finish when I have a chance.
+		if (suitworth_hearts != 7 && (suitworth_hearts <= suitworth_diamonds && suitworth_hearts <= suitworth_spades
+		 && suitworth_hearts <= suitworth_clubs))
 		{
 			
 		}
-		if (b != 7 && (b <= a && b <= c && b <= d))
+		if (suitworth_diamonds != 7 && (suitworth_diamonds <= suitworth_hearts && suitworth_diamonds <= suitworth_spades 
+		&& suitworth_diamonds <= suitworth_clubs))
 		{
 			
 		}
-		if (c != 7 && (c <= b && c <= a && c <= d))
+		if (suitworth_spades != 7 && (suitworth_spades <= suitworth_diamonds && suitworth_spades <= suitworth_hearts 
+		&& suitworth_spades <= suitworth_clubs))
 		{
 			
 		}
-		if (d != 7 && (a <= b && d <= c && d <= a))
+		if (suitworth_clubs != 7 && (suitworth_hearts <= suitworth_diamonds && suitworth_clubs <= suitworth_spades 
+		&& suitworth_clubs <= suitworth_hearts))
 		{
 			
 		}
-		*westsuit = "Hearts"; // This is cheating, I think other functions need to be developed before I finish this.  It is much more complete now.
-		/// Specifically I am looking for something that checks for pinochles and meld so they can see which hand is better for them.
+		westsuit = "Hearts"; // This is cheating, I think other functions need to be developed before I finish this.  
+		/// Specifically I am looking for something that checks for pinochles and meld so they can see which hand is 
+		///better for them.
 	}
 	
-	
-	
-		
-	outplayer1.close();	
-	
-	if (west_player.howmanyhearts > west_player.howmanydiamonds && west_player.howmanyhearts > west_player.howmanyspades && west_player.howmanyhearts > west_player.howmanyclubs)
-	{	*westsuit = "Hearts";	}
-
-	if (west_player.howmanydiamonds > west_player.howmanyhearts && west_player.howmanydiamonds > west_player.howmanyspades && west_player.howmanydiamonds >  west_player.howmanyclubs)
-	{*westsuit = "Diamonds";}
-
-	if (west_player.howmanyspades > west_player.howmanydiamonds && west_player.howmanyspades > west_player.howmanyhearts && west_player.howmanyspades >  west_player.howmanyclubs)
-	{	*westsuit = "Spades";}
-
-	if ( west_player.howmanyclubs > west_player.howmanydiamonds &&  west_player.howmanyclubs > west_player.howmanyspades &&  west_player.howmanyclubs > west_player.howmanyhearts)
-	{	*westsuit = "Clubs";}
-	
-	ofstream out("error.txt");
-	out << "West power is: " << west_player.first1.power << endl;
-	
-	if (west_player.howmanyhearts == west_player.howmanydiamonds)
-	{
-		
-		
-	}
-	
-	out.close();
-	if (*westsuit != "Hearts" && *westsuit != "Diamonds" && *westsuit != "Spades" && *westsuit != "Clubs")
+	if (westsuit != "Hearts" && westsuit != "Diamonds" && westsuit != "Spades" && westsuit != "Clubs")
 	{
 		//if (west_clubs == west_diamonds || west_diamonds == west_hearts 
 		//cout << "There was an error with Westsuit! in cards.cpp -- playersuits()" << endl;
-		*westsuit = "Clubs";
+		westsuit = "Clubs";
 	}
-
-	if (north_player.howmanyhearts > north_player.howmanydiamonds && north_player.howmanyhearts >north_player.howmanyspades&& north_player.howmanyhearts > north_player.howmanyclubs)
-	{	*northsuit = "Hearts";}
-
-	if (north_player.howmanydiamonds > north_player.howmanyhearts && north_player.howmanydiamonds > north_player.howmanyspades && north_player.howmanydiamonds > north_player.howmanyclubs)
-	{	*northsuit = "Diamonds";}
-
-	if (north_player.howmanyspades > north_player.howmanydiamonds && north_player.howmanyspades > north_player.howmanyhearts && north_player.howmanyspades > north_player.howmanyclubs)
-	{	*northsuit = "Spades";}
-
-	if (north_player.howmanyclubs > north_player.howmanydiamonds && north_player.howmanyclubs > north_player.howmanyspades && north_player.howmanyclubs > north_player.howmanyhearts)
-	{	*northsuit = "Clubs"; }
-
-	if (*northsuit != "Hearts" && *northsuit != "Diamonds" && *northsuit != "Spades" && *northsuit != "Clubs")
-	{
-		//cout << "There was an error with Northsuit! in cards.cpp -- playersuits()" << endl;
-		*northsuit = "Clubs";
-	}
-
-	if (east_player.howmanyhearts > east_player.howmanydiamonds && east_player.howmanyhearts > east_player.howmanyspades && east_player.howmanyhearts > east_player.howmanyclubs)
-	{	*eastsuit = "Hearts";}
-
-	if (east_player.howmanydiamonds > east_player.howmanyhearts && east_player.howmanydiamonds > east_player.howmanyspades && east_player.howmanydiamonds > east_player.howmanyclubs)
-	{	*eastsuit = "Diamonds";}
-
-	if (east_player.howmanyspades > east_player.howmanydiamonds && east_player.howmanyspades > east_player.howmanyhearts && east_player.howmanyspades > east_player.howmanyclubs)
-	{	*eastsuit = "Spades";}
-
-	if (east_player.howmanyclubs > east_player.howmanydiamonds && east_player.howmanyclubs >east_player.howmanyspades && east_player.howmanyclubs > east_player.howmanyhearts)
-	{	*eastsuit = "Clubs"; }
-
-	if (*eastsuit != "Hearts" && *eastsuit != "Diamonds" && *eastsuit != "Spades" && *eastsuit != "Clubs")
-	{
-		//cout << "There was an error with Eastsuit! in cards.cpp -- playersuits()" << endl;
-		*eastsuit = "Clubs";
-	}
+	outplayer1.close();	
 }
 
 

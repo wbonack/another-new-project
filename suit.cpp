@@ -1,3 +1,5 @@
+/// This file has a lot of wierd and useless shit.
+
 #include "headers.h"
 
 suit::suit() // Shouldn't be used -- useless?
@@ -14,9 +16,12 @@ int howmanyofsuit(player & play)
 	
 	int cardspersuit[4];
 	int powerpersuit[4];
+	
 	void zero_out_array(int array_size, int * array_pointer);
+	
 	zero_out_array(4, &cardspersuit[0]);
 	zero_out_array(4, &powerpersuit[0]);
+	
 	int thecounter = 0;
 	while (thecounter < 4)
 {	
@@ -181,7 +186,7 @@ queenname = "Queen of Clubs" , jackname = "Jack of Clubs" , ninename = "Nine of 
 };
 
 
-hand::hand()
+hand::hand() /// What exactly does this hack do?
 {
 	suit hearts("heart");
 	heart = hearts;

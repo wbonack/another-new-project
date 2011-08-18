@@ -14,11 +14,12 @@ void saythecards(string,string,string,string,string,string,string, string,string
 		int *, string *, int*, player); 
 	//This is located in .cpp
 
-	void playersuits(string *, string *, string *, int, int, int, int, int, int, int,int, int,int,int, int);
+	void playersuits(string &, string &, string &, int, int, int, int, int, int, int,int, int,int,int, int);
 
-	void passing(string winner, string * c1, string * c2, string * c3, string * c4, int* passed1, int* passed2,int* passed3,int* 		passed4, int* pass1, int* pass2, int* pass3, int* pass4, player * nplay, player * wplay, player * eplay, string suitname, bool * firsttime, player * play);
+	void passing(string winner, string * c1, string * c2, string * c3, string * c4, int* passed1, int* passed2,int* passed3,int* 		
+	passed4, int* pass1, int* pass2, int* pass3, int* pass4, player & nplay, player & wplay, player & eplay, player & play, string suitname,   bool * firsttime);
 
-	void cardschangehands(string, int *, int *, int *, int *, int *, int *, int *, int *,  player *, player *, player *, player *);
+	void cardschangehands(string, int *, int *, int *, int *, int *, int *, int *, int *,  player *, player *, player *, player *);  /// In passing.cpp
 
 	void play_hand(string, string, player &, player &, player &, player &, alltrick &, int);
 

@@ -20,17 +20,14 @@ void passing(int *, int, string, int &, int &, int &, int &, bool, string * , st
 void passingwork(int * x, int card, int & first, int  & second, int  & third, int  & fourth, bool * happened, string *, 
 	string *, string *, string *);
 
-string whichcardpassed(player *,int, int *, string,string,string,string,string,string,string,string,string,string,string,
+string whichcardpassed(player &,int, int *, string,string,string,string,string,string,string,string,string,string,string,
 	string, string, string, string, string, int);
 
-void passing(string winner, string * c1, string * c2, string * c3, string * c4, int* passed1, int* passed2,int* passed3,int* passed4, int* pass1, int* pass2, int* pass3, int* pass4, player * nplay, player * wplay, player * eplay, string suitname, bool * firsttime, player * play)
+void passing(string winner, string * c1, string * c2, string * c3, string * c4, int* passed1, int* passed2,int* passed3,int* passed4, int* pass1, int* pass2, int* pass3,
+ int* pass4, player & nc, player & wc, player & ec, player & pc, string suitname , bool * firsttime )
 {
 	// c1 - c4 are the cards chosen to be passed.
-	player pc = (*play);  // pc == playercard
-	player nc = (*nplay); // nc == northcard
-	player ec = (*eplay); // ec == eastcard
-	player wc = (*wplay); // wc == westcard
-
+	
 	if ((winner == "Player"&& *firsttime == true)||(winner == "North"&& *firsttime == false)) // If Player wins
 	{
 		playerspassing(suitname, nc.card1,nc.card2,nc.card3,nc.card4,nc.card5,nc.card6,nc.card7,nc.card8,nc.card9,
@@ -97,13 +94,13 @@ void passing(string winner, string * c1, string * c2, string * c3, string * c4, 
 		cout << endl;
 	}
 
-		*c1 = whichcardpassed(play,card1a, passed1,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
-			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, *c1, *c2, *c3,*c4, *pass1);
-		*c2 = whichcardpassed(play,card2a, passed2,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
+		*c1 = whichcardpassed(pc,card1a, passed1,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
+			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, *c1, *c2, *c3, *c4, *pass1);
+		*c2 = whichcardpassed(pc,card2a, passed2,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
 			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, *c1, *c2, *c3, *c4, *pass2);
-		*c3 = whichcardpassed(play,card3a, passed3,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
+		*c3 = whichcardpassed(pc,card3a, passed3,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
 			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, *c1, *c2, *c3, *c4 , *pass3);
-		*c4 = whichcardpassed(play,card4a, passed4, pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
+		*c4 = whichcardpassed(pc,card4a, passed4, pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
 			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, *c1, *c2, *c3, *c4, *pass4);
 	}
 
@@ -120,9 +117,9 @@ void savemorespace(player *, int *, string *);
 	*firsttime = false; 
 }
 
-string whichcardpassed(player * play,int card, int * returnval, string order1, string order2, string order3, string order4, string order5, string order6, string order7,  string order8,string order9, string order10,string order11,string order12, string  c1, string c2, string  c3, string  c4, int pass)
+string whichcardpassed(player & play, int card, int * returnval, string order1, string order2, string order3, string order4, string order5, string order6, string order7,  string order8,string order9, string order10,string order11,string order12, string  c1, string c2, string  c3, string  c4, int pass)
 {
-	player p = (*play); 
+	player p = (play); 
 	    if (card == 1) { *returnval =  p.ord1 ;  cout << "You passed : " << order1 << endl;  return order1; }
 
 		if (card == 2) { *returnval =  p.ord2;  cout << "You passed : " << order2 << endl;  return order2;}
@@ -428,7 +425,7 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 	player & nplay = (*nplaya);
 	player & eplay = (*eplaya);
 	
-	winnersfirst = *card1;
+	winnersfirst = *card1; /// This makes no sense.
 	*card1 = *card5;
 	winnerssecond = *card2;
 	*card2 = *card6;
@@ -449,7 +446,7 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 
 		whichcard  = go(play, *card4, winnersfourth);
 
-		whichcard  = go(nplay, winnersfirst, *card1);
+		whichcard  = go(nplay, winnersfirst, *card1); /// What the fuck, why do the arguments change.
 
 		whichcard  = go(nplay, winnerssecond, *card2);
 
