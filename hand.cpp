@@ -17,6 +17,7 @@ while (array_element < array_size)
 	}
 } // For C# this will be Array.clear()
 
+
 void deal(int hand_counter, scoreclass & scr) /// Change howmany to something that makes sense
 {
 	int suitint = 0; 
@@ -148,7 +149,7 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 
 	line();
 
-	alltrick test; // & This holds all the tricks played in play_hands()
+	alltrick test; /// What a terrible name
 
 	play_hand(winnername, suitname, play, wplay, nplay, eplay, test, suitint);
 
