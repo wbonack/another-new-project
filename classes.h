@@ -125,15 +125,17 @@ class player // & This should be documented so that the programmer understands a
 public:
 	int card1, card2, card3, card4, card5,card6,card7,card8, card9,card10,card11, card12;
 	
-	int * card1ptr; int * card2ptr; int * card3ptr; int * card4ptr; // There has to be a better way....
+	int * card1ptr; int * card2ptr; int * card3ptr; int * card4ptr; // There has to be a better way.... Pointers in a class seem counterintuitive....
 	int * card5ptr; int * card6ptr; int * card7ptr; int * card8ptr;
 	int * card9ptr; int * card10ptr; int * card11ptr; int * card12ptr;
+	
+	int pass_possibility1;
+	int pass_possibility2;
+	int pass_possibility3;
+	int pass_possibility4;
 
 	int ord1,ord2,ord3,ord4,ord5,ord6,ord7,ord8,ord9,ord10,ord11,ord12;
 	string order1, order2, order3, order4, order5, order6, order7, order8, order9, order10, order11, order12;
-
-	int * c1;
-	int * c2;
 
 	void cardnames();
 

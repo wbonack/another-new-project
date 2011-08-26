@@ -5,7 +5,6 @@
 #include "hand.h"
 
 
-
 void zero_out_array(int array_size, int * array) /// C# pointer problem fixed here.
 {
 int array_element = 0;
@@ -18,9 +17,9 @@ while (array_element < array_size)
 } // For C# this will be Array.clear()
 
 
-void deal(int hand_counter, scoreclass & scr) /// Change howmany to something that makes sense
+void deal(int hand_counter, scoreclass & scr) 
 {
-	int suitint = 0; 
+	int suit_number = 0; 
 	int bidding_times = 3;
 	
 	cout << "! # " << hand_counter << " !" << endl; 
@@ -29,11 +28,11 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	string dealer;
 	finddealer(hand_counter, dealer);  /// in hand.cpp
 
-	player play = recieve_cards(1); 
+	player play = recieve_cards(1); /// recieve_cards() is in recieve_cards.cpp
 
 	player wplay = recieve_cards(2); 
 	
-	play.getorder();
+	play.getorder(); /// Player names don't show up without this being called.
 	
 	cout << endl << "You recieved: " << endl; 
 	
@@ -45,26 +44,44 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	///These are the east computer players cards
 	player eplay = recieve_cards(4);  
 	
-	int ongoin_bid = 1; /// The bid that will be passed around alot
+	int ongoin_bid = 1; ///Why does this start at 1?
 
-	int westpot = 0,northpot = 0,eastpot = 0,westscore = 0, northscore = 0,eastscore = 0, playerpot = 0, playerscore = 0;
+	int westpot = 0; /// Why this name?
+	int northpot = 0;
+	int eastpot = 0;
+	int westscore = 0;
+	int northscore = 0;
+	int eastscore = 0;
+	int playerpot = 0;
+	int playerscore = 0;
 
-	bool  westwin = false, northwin = false, eastwin = false, playerwin = false; 
+	bool westwin = false;
+	bool northwin = false;
+	bool eastwin = false;
+	bool playerwin = false;
 	
-	int card_passed[8];
+	int card_passed[8]; /// This should to overwritten by the player classes pass_possibilies :)
 	
 	zero_out_array(8, &card_passed[0]); /// at the beginning of this file.
 
-	string ppassed1, ppassed2, ppassed3, ppassed4; //Names of the cards passed later
-	///The first call which tells the computer players their bids
+	//Names of the cards passed later used in passing()
+	string ppassed1; 
+	string ppassed2;
+	string ppassed3;
+	string ppassed4; 
 	
 	//The function that will give the players their score and allows the computerized players bid 
 	
 	scoring_func( &westscore, &northscore, &eastscore, &playerscore, &play, &wplay, &nplay, &eplay);
 
-	bool westpass = false, northpass = false, eastpass = false, playerpass = false; // Booleans to see if the player passed
+	// Booleans to see if the player passed
+	bool westpass = false;
+	bool northpass = false;
+	bool eastpass = false;
+	bool playerpass = false; 
 	
-	int newcounter = 1, finalbid = 0; /// newcounter -- Used in bid() and bid.cpp functions, finalbid -- holds finalbid
+	int newcounter = 1; /// newcounter -- Used in bid() and bid.cpp functions,
+	int finalbid = 0;  ///finalbid -- holds finalbid
 	
 	string winnername, suitname; // Makes the string that will hold the winner's name | suitname
 
@@ -88,10 +105,10 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	while(continue_bidding == true) // Bidding Loop
 {	 
 	bid(westsuit, northsuit, eastsuit,&newcounter,&bidding_times, &continue_bidding, &ongoin_bid, westpot , northpot, eastpot ,&playerpass, &westpass,&northpass,&eastpass,&westwin, &northwin, &eastwin, &playerwin, 
-		&finalbid, &winnername, &suitint, play); 
+		&finalbid, &winnername, &suit_number, play); 
 
-		if (suitint > 0)
-		{	switch(suitint)
+		if (suit_number > 0)
+		{	switch(suit_number)
 			{
 			case 1:
 				suitname = "Hearts";
@@ -125,19 +142,19 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	/// Passing is ugly and should only require one function that is 100 times simpler than this one.
 	
 	///This will require knowing who are partners and then the passing probably will be quite difficult, but we will see.
-	passing(winnername,  &ppassed1, &ppassed2, &ppassed3, &ppassed4, &card_passed[0], &card_passed[1],&card_passed[2], 
-		&card_passed[3], &card_passed[4], &card_passed[5], &card_passed[6], &card_passed[7], nplay, wplay, eplay, play,
-		suitname,  &firsttime); 
-		// & Ideally these will take only player instances to make them work -- This code 
-		//looks like a project to simplify however.
+	passing(winnername,  ppassed1, ppassed2, ppassed3, ppassed4, card_passed[0], card_passed[1],card_passed[2], 
+		card_passed[3], card_passed[4], card_passed[5], card_passed[6], card_passed[7], nplay, wplay, eplay, play,
+		suitname,  firsttime); 
+		// & Ideally these will take only player instances to make them work -- 
+			/// This code looks like a project to simplify however.
 		// Rule: Make all your code as easy to read as possible when writing it... name it for what it does.
 
-	passing(winnername, &ppassed1, &ppassed2, &ppassed3, &ppassed4, &card_passed[4], &card_passed[5],&card_passed[6], 
-		&card_passed[7], &card_passed[0], &card_passed[1], &card_passed[2], &card_passed[3], nplay, wplay, eplay, play,
-		suitname,   &firsttime);
+	passing(winnername, ppassed1, ppassed2, ppassed3, ppassed4, card_passed[4], card_passed[5],card_passed[6], 
+		card_passed[7], card_passed[0], card_passed[1], card_passed[2], card_passed[3], nplay, wplay, eplay, play,
+		suitname,   firsttime);
 	
 	cardschangehands(winnername, &card_passed[0], &card_passed[1], &card_passed[2],&card_passed[3],&card_passed
-		[4],&card_passed[5],&card_passed[6],&card_passed[7], &play, &wplay, &nplay, &eplay);
+		[4],&card_passed[5],&card_passed[6],&card_passed[7], play, wplay, nplay, eplay);
 
 	play.getorder(); /// Why do these need to be called?
 	
@@ -149,9 +166,9 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 
 	line();
 
-	alltrick test; /// What a terrible name
+	alltrick test; /// What a terrible name, this sucks
 
-	play_hand(winnername, suitname, play, wplay, nplay, eplay, test, suitint);
+	play_hand(winnername, suitname, play, wplay, nplay, eplay, test, suit_number);
 
 	p();
 	
@@ -165,9 +182,7 @@ void deal(int hand_counter, scoreclass & scr) /// Change howmany to something th
 	
 	finalscoring(test, scr);
 
-	//cout << endl << "Winnername: " << winnername << endl;
 	cout << "Finalbid: " << finalbid << endl;
-	//cout << "Playerscore is : " << playerscore << endl << endl;
 
 	if (winnername == "Player" || winnername == "North")
 	{

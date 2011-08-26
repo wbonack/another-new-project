@@ -1,6 +1,6 @@
-#include "headers.h"
+/// Files like this suck..... what idiot would code like this....
 
-/// Files like this suck.....
+#include "headers.h"
 
 void otherbidding(int * ongoinptr, int, bool*);  // Bidding depending on their initial cards
 	
@@ -15,12 +15,15 @@ int suittonumber(string);
 void bid(string westsuit, string northsuit, string eastsuit, int* newcounter, int * timesbidding, bool * forloopptr, int * ongoinptr, int west , int north, int east, bool * playerpass, bool*westpass,bool*northpass, bool*eastpass, bool * westwin, bool * northwin, bool * eastwin, bool * playerwin, int * finalbid, string * winner, int * suit, player play1)
 {
 	string bidder; 
+	
 	int bidforloopcounter = *timesbidding;
-	bool dog = true;
+	
+	bool loop = true; 
+	
 	bool bidding_func(string, string, string,string bidder, int *, int * timesbidding, int bidforloopcounter,bool * loop, int * ongoinptr,int,int,int,bool *,bool*, bool*, bool*, bool*, bool*, bool*, bool*, string *, 	
 		int*, player);
 	
-	*forloopptr = bidding_func(westsuit, northsuit, eastsuit, bidder, newcounter, timesbidding, bidforloopcounter, &dog, 	
+	*forloopptr = bidding_func(westsuit, northsuit, eastsuit, bidder, newcounter, timesbidding, bidforloopcounter, &loop, 	
 		ongoinptr,west, north, east, playerpass,westpass, northpass, eastpass, westwin, northwin, eastwin, playerwin, 
 		winner, suit, play1 );
 
