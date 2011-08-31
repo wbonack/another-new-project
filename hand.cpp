@@ -139,7 +139,13 @@ void deal(int hand_counter, scoreclass & scr)
 
 	bool firsttime = true; // Used to see if its the pass to the partner who won the deal or the pass back // & 2 x passing()
 	
-	/// Passing is ugly and should only require one function that is 100 times simpler than this one.
+	
+		/// Passing is ugly and should only require one function that is 100 times simpler than this one.
+		
+		void new_passing(string & winner, string & suitname, player & play, player & wplay, player & nplay, player & eplay);
+		
+		new_passing(winnername, suitname, play, wplay, nplay, eplay);
+		
 	
 	///This will require knowing who are partners and then the passing probably will be quite difficult, but we will see.
 	passing(winnername,  ppassed1, ppassed2, ppassed3, ppassed4, card_passed[0], card_passed[1],card_passed[2], 

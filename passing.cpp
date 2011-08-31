@@ -5,8 +5,6 @@
 
 #include "headers.h"
 
-// & This file has over 526 lines and is unreadable!! It needs to be simplified!
-
 void playerspassing(string suitname, player play, int & a, int & b, int & c, int & d, bool firsttime, string & c1, 
 			string & c2, string & c3, string & c4);
 	//playerspassing  --  located later in this .cpp
@@ -18,12 +16,11 @@ bool check1to16(int *, int , int, int, bool);
 
 void savespace(string suit, int * x, player play, int & a, int & b, int & c, int & d, bool firsttime, string & c1,string & c2, string & c3, string & c4);
 
-void passing(int x, int card, string suitname, int & first, int  & second, int & third, int  & fourth, bool firsttime, string & c1, string & c2, string & c3, string & c4);
+void passing(int & x, int card, string suitname, int & first, int  & second, int & third, int  & fourth, bool firsttime, string & c1, string & c2, string & c3, string & c4);
 
 void passingwork(int * x, int card, int & first, int  & second, int  & third, int  & fourth, bool * happened);
 
-string whichcardpassed(player & play, int card, int & returnval, string order1, string order2, string order3, string order4, string order5, string order6, string order7,  
-string order8,string order9, string order10,string order11,string order12, string &  c1, string & c2, string &  c3, string & c4, int pass);
+string whichcardpassed(player & play, int card, int & returnval, string &  c1, string & c2, string &  c3, string & c4, int pass);
 
 void passing(string winner, string & c1, string & c2, string & c3, string & c4, int & passed1, int & passed2,int & passed3,int & passed4, int & pass1, int & pass2, int & pass3,
  int & pass4, player & nc, player & wc, player & ec, player & pc, string suitname , bool & firsttime )
@@ -38,6 +35,11 @@ void passing(string winner, string & c1, string & c2, string & c3, string & c4, 
 		c2 = get_passed_card_name(nc, passed2);
 		c3 = get_passed_card_name(nc, passed3);
 		c4 = get_passed_card_name(nc, passed4);
+		
+		pc.pass_possibility_name1 = c1;
+		pc.pass_possibility_name2 = c2;
+		pc.pass_possibility_name3 = c3;
+		pc.pass_possibility_name4 = c4;
 	}
 	if ((winner == "West"&& firsttime == true)||(winner == "East" && firsttime == false))
 	{
@@ -91,18 +93,19 @@ void passing(string winner, string & c1, string & c2, string & c3, string & c4, 
 		cout << "(Y/N)" << endl;
 		char input; 
 		cin >> input;
-		if (input == 'y' || input == 'Y') { break; }
+		if (input == 'y' || input == 'Y') { break;}
 		cout << endl;
 	}
-
-		c1 = whichcardpassed(pc,card1a, passed1,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
-			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, c1, c2, c3, c4, pass1);
-		c2 = whichcardpassed(pc,card2a, passed2,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
-			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, c1, c2, c3, c4, pass2);
-		c3 = whichcardpassed(pc,card3a, passed3,  pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
-			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, c1, c2, c3, c4 , pass3);
-		c4 = whichcardpassed(pc,card4a, passed4, pc.order1,pc.order2,pc.order3,pc.order4,pc.order5, pc.order6, 
-			pc.order7, pc.order8, pc.order9, pc.order10,pc.order11, pc.order12, c1, c2, c3, c4, pass4);
+			
+		c1 = whichcardpassed(pc,card1a, passed1,  c1, c2, c3, c4, pass1);
+		c2 = whichcardpassed(pc,card2a, passed2,  c1, c2, c3, c4, pass2);
+		c3 = whichcardpassed(pc,card3a, passed3,  c1, c2, c3, c4 , pass3);
+		c4 = whichcardpassed(pc,card4a, passed4,  c1, c2, c3, c4, pass4);
+		
+		pc.pass_possibility_name1 = c1;
+		pc.pass_possibility_name2 = c2;
+		pc.pass_possibility_name3 = c3;
+		pc.pass_possibility_name4 = c4;
 	}
 
 	if ((winner == "East"&& firsttime == true)||(winner == "West" && firsttime == false))
@@ -117,32 +120,31 @@ void passing(string winner, string & c1, string & c2, string & c3, string & c4, 
 	firsttime = false; 
 }
 
-string whichcardpassed(player & p, int card, int & returnval, string order1, string order2, string order3, string order4, string order5, string order6, string order7,  
-string order8,string order9, string order10,string order11,string order12, string &  c1, string & c2, string &  c3, string &  c4, int pass)
+string whichcardpassed(player & p, int card, int & returnval, string &  c1, string & c2, string &  c3, string &  c4, int pass)
 {
-	    if (card == 1) { returnval =  p.ord1 ;  cout << "You passed : " << order1 << endl;  return order1; }
+	    if (card == 1) { returnval =  p.ord1 ;  cout << "You passed : " << p.order1 << endl;  return p.order1; }
 
-		if (card == 2) { returnval =  p.ord2;  cout << "You passed : " << order2 << endl;  return order2;}
+		if (card == 2) { returnval =  p.ord2;  cout << "You passed : " << p.order2 << endl;  return p.order2;}
 
-		if (card == 3) { returnval =  p.ord3;  cout << "You passed : " << order3 << endl; return order3;}
+		if (card == 3) { returnval =  p.ord3;  cout << "You passed : " << p.order3 << endl; return p.order3;}
 
-		if (card == 4)  { returnval =  p.ord4; cout << "You passed : " << order4 << endl; return order4;}
+		if (card == 4)  { returnval =  p.ord4; cout << "You passed : " << p.order4 << endl; return p.order4;}
 
-		if (card == 5) { returnval =  p.ord5;cout << "You passed : " << order5 << endl; return order5;}
+		if (card == 5) { returnval =  p.ord5;cout << "You passed : " << p.order5 << endl; return p.order5;}
 
-		if (card == 6 ){ returnval =  p.ord6;cout << "You passed : " << order6 << endl;return order6;}
+		if (card == 6 ){ returnval =  p.ord6;cout << "You passed : " << p.order6 << endl;return p.order6;}
 
-		if (card == 7) { returnval =  p.ord7;cout << "You passed : " << order7 << endl;return order7;}
+		if (card == 7) { returnval =  p.ord7;cout << "You passed : " << p.order7 << endl;return p.order7;}
 
-		if (card == 8) { returnval =  p.ord8;cout << "You passed : " << order8 << endl;return order8;}
+		if (card == 8) { returnval =  p.ord8;cout << "You passed : " << p.order8 << endl;return p.order8;}
  
-		if (card == 9)  { returnval =  p.ord9;cout << "You passed : " << order9 << endl;return order9;}
+		if (card == 9)  { returnval =  p.ord9;cout << "You passed : " << p.order9 << endl;return p.order9;}
 
-		if (card == 10){ returnval =  p.ord10;cout << "You passed : " << order10 << endl; return order10;}
+		if (card == 10){ returnval =  p.ord10;cout << "You passed : " << p.order10 << endl; return p.order10;}
 
-		if (card == 11){ returnval =  p.ord11;cout << "You passed : " << order11 << endl; return order11;}
+		if (card == 11){ returnval =  p.ord11;cout << "You passed : " << p.order11 << endl; return p.order11;}
 
-		if (card == 12){ returnval =  p.ord12;cout << "You passed : " << order12 << endl; return order12;}
+		if (card == 12){ returnval =  p.ord12;cout << "You passed : " << p.order12 << endl; return p.order12;}
 
 		if (card == 13){ returnval = pass; cout << "You passed : " << c1 << endl; return c1;}
 
@@ -183,8 +185,7 @@ void playerspassing(string suitname, player play, int & passed1, int & passed2, 
 	
 	if (suitname == "Hearts")
 	{
-		savespace(suitname, &x, play,
-		passed1,passed2,passed3,passed4, firsttime, c1, c2, c3, c4);
+		savespace(suitname, &x, play,passed1,passed2,passed3,passed4, firsttime, c1, c2, c3, c4);
 	}
 
 	if (suitname == "Diamonds")
@@ -243,7 +244,7 @@ string get_passed_card_name(player north, int passed1)
 		 }
 }
 
-void passing(int x, int card, string suitname, int & first, int  & second, int & third, int  & fourth, bool firsttime, string & c1, string & c2, string & c3, string & c4)
+void passing(int & x, int card, string suitname, int & first, int  & second, int & third, int  & fourth, bool firsttime, string & c1, string & c2, string & c3, string & c4)
 
 {	
 	if (suitname == "Hearts")
@@ -254,18 +255,41 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 		{
 		if (card==1||card ==2||card ==3||card ==4||card==5||card==6||card == 7|| card == 8||card == 9||card==10)
 			{
-				passingwork(&x, card, first, second, third, fourth, &happened);
+				
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+			if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+			if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+			if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
+				
+				
 			}
 		
 		if (card == 13||card == 14||card == 25 || card == 26 || card== 37 || card == 38 ) 
 			{
-				passingwork(&x, card, first, second, third, fourth, &happened);
+				
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+			
+			if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
+			
 			}
 		
 		if (card == 17 || card == 18 || card == 19 || card == 20 || card == 29 || card == 30 || card == 31 || card == 
 			32||card == 41 || card ==42  || card == 43 || card == 44)
 			{
-				passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+			if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 		}
 
@@ -274,12 +298,24 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 			if (card == 11 || card == 12 || card == 23 || card == 24 || card == 35 || card == 36 || card == 47 || 
 				card == 48)
 			{
-				passingwork(&x, card , first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+			
+			if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 			if (card == 17 || card == 18 || card == 19 || card ==20 || card == 29 || card == 30 || card == 31 || 	
 				card == 32|| card == 41 || card == 42 || card == 43 || card == 44)
 			{
-				passingwork(&x, card , first, second , third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+			if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+			
+			if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 		}
 }
@@ -293,17 +329,35 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 	
 	if (card==13||card ==14||card ==15||card ==16||card==17||card==18||card == 19|| card == 20||card == 21||card==22)
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 	if (card == 1|| card ==2 || card == 25 || card == 26 || card== 37 || card == 38 )
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 
 	if (card == 5 || card == 6 || card == 7 || card == 8 || card == 29 || card == 30 || card == 31 || card == 32||
 			card == 41 || card ==42  || card == 43 || card == 44)
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 	}
 
@@ -312,12 +366,24 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 			if (card == 11 || card == 12 || card == 23 || card == 24 || card == 35 || card == 36 || card == 47 || 
 				card == 48)
 			{
-				passingwork(&x, card , first, second, third, fourth, &happened);
+				if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 			if (card == 4 || card == 5 || card == 6 || card ==7 || card == 29 || card == 30 || card == 31 || card 
 				== 32|| card == 41 || card == 42 || card == 43 || card == 44)
 			{
-				passingwork(&x, card , first, second , third, fourth, &happened);
+				if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 	}
 }
@@ -331,18 +397,36 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 	{
 	if (card==25||card ==26||card ==27||card ==28||card==29||card==30||card == 31|| card == 32||card == 33||card==34)
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 
 	if (card == 1|| card ==2 || card == 13 || card == 14 || card== 37 || card == 38 )
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 
 	if (card == 5 || card == 6 || card == 7 || card == 8 || card == 17 || card == 18 || card == 19 || card == 20||
 			card == 41 || card ==42  || card == 43 || card == 44)
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 	}
 
@@ -351,12 +435,24 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 			if (card == 11 || card == 12 || card == 23 || card == 24 || card == 35 || card == 36 || card == 47 || 
 				card == 48)
 			{
-				passingwork(&x, card , first, second, third, fourth, &happened);
+				if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 			if (card == 4 || card == 5 || card == 6 || card ==7 || card == 17 || card == 18 || card == 19 || card 
 				== 20|| card == 41 || card == 42 || card == 43 || card == 44)
 			{
-				passingwork(&x, card , first, second , third, fourth, &happened);
+				if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 	}
 }
@@ -368,18 +464,36 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 	{
 	if (card==37||card ==38||card ==39||card ==40||card==41||card==42||card == 43|| card == 44||card == 45||card==46)
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 	
 	if (card == 1|| card ==2 || card == 13 || card == 14 || card== 25 || card == 26 ) // Aces
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 
 	if (card == 5 || card == 6 || card == 7 || card == 8 || card == 17 || card == 18 || card == 19 || card == 20||
 			card == 29 || card ==30  || card == 31 || card == 32)
 		{
-			passingwork(&x, card, first, second, third, fourth, &happened);
+			if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 		}
 	}
 
@@ -388,28 +502,30 @@ void passing(int x, int card, string suitname, int & first, int  & second, int &
 			if (card == 11 || card == 12 || card == 23 || card == 24 || card == 35 || card == 36 || card == 47 || 
 				card == 48)
 			{
-				passingwork(&x, card , first, second, third, fourth, &happened);
+				if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 			if (card == 4 || card == 5 || card == 6 || card ==7 || card == 17 || card == 18 || card == 19 || card 
 
 				== 20|| card == 29 || card == 30 || card == 31 || card == 32 )
 			{
-				passingwork(&x, card , first, second , third, fourth, &happened);
+				if (first < 1&&happened == false){first = card; x++; happened = true; } 
+		
+		if (first >0 && second <1 && happened == false){second = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third <1&& happened == false){third = card; x++; happened = true; } 
+		
+		if (first >0 && second>0 && third >0&&fourth <1&& happened == false){fourth = card; x++; happened = true;} 
 			}
 		}
 	}
 }
 
-void passingwork(int * x, int card, int & first, int & second, int & third, int &fourth, bool * happened)
-{
-		if (first < 1&&*happened == false){first = card; (*x)++; *happened = true; } 
-		
-		if (first >0 && second <1 && *happened == false){second = card; (*x)++; *happened = true; } 
-		
-		if (first >0 && second>0 && third <1&& *happened == false){third = card; (*x)++; *happened = true; } 
-		
-		if (first >0 && second>0 && third >0&&fourth <1&& *happened == false){fourth = card; (*x)++; *happened = true;} 
-}
 
 void test1(player *, player *, player *, player *, int *, int *, int *, int *, string);
 int work(int , player *);
@@ -417,10 +533,10 @@ int work(int , player *);
 void cardschangehands(string winner, int * card1, int * card2, int * card3, int * card4, int *card5, int * card6, int * card7
 	, int * card8,  player & play, player & wplay, player & nplay, player & eplay) // This comes from hand.cpp
 {
-	int winnersfirst, winnerssecond, winnersthird, winnersfourth ; /// These will be equal to the players passes
+	int winnersfirst, winnerssecond, winnersthird, winnersfourth; /// These will be equal to the players passes
 	int whichcard; // Should only be 1 to 12
 	
-	winnersfirst = *card1; /// This makes no sense.
+	winnersfirst = *card1;   /// This makes no sense.
 	*card1 = *card5;
 	winnerssecond = *card2;
 	*card2 = *card6;
@@ -533,9 +649,10 @@ void cardschangehands(string winner, int * card1, int * card2, int * card3, int 
 
 }
 
-int go(player & play, int card, int passed)
+int go(player & play, int card, int passed) /// What does this do?
 {
-	int * playercard = &play.card1;
+	int * playercard = &play.card1;	
+	
 	int x = 1;
 	while (x < 13)
 	{

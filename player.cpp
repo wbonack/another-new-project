@@ -232,7 +232,7 @@ void player::saycards_in_hand() // Used when player is playing their hand and ch
 }
 	
 	
-void player::temporaryhack() // Bullshit -- Is this even needed anymore?
+void player::temporaryhack() // Bullshit -- Is this even needed anymore? .... Yep for play_hand.... :(
 {
 	convert();
 	first1.fixorder(first1, second1, third1, fourth1, fifth1, sixth1, seventh1, eight1, ninth1, tenth1, eleventh1, twelth1);

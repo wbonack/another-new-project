@@ -39,28 +39,28 @@ ostream &operator<<(ostream &os, card & c){ cout << "(" << c.order << ") " << c.
 		if (card == s.ace1) {h.spade.ace1bool = true; name = s.acename; suitnumber = 3; played = false; power = 1;}
 		if (card == s.ace2) {h.spade.ace2bool = true; name = s.acename; suitnumber = 3; played = false; power = 1;}
 		if (card == s.ten1) {h.spade.ten1bool = true; name = s.tenname; suitnumber = 3; played = false; power = 2;}
-		if (card == s.ten2) {h.spade.ten2bool = true; name = s.tenname; suitnumber = 3; played = false; power = 2;} // Why is played initialized in only half of these?
-		if (card == s.king1) {h.spade.king1bool = true; name = s.kingname; suitnumber = 3;  power = 3;}
-		if (card == s.king2) {h.spade.king2bool = true; name = s.kingname; suitnumber = 3;  power = 3;}
-		if (card == s.queen1) {h.spade.queen1bool = true; name = s.queenname; suitnumber = 3;  power = 4;}
-		if (card == s.queen2) {h.spade.queen2bool = true; name = s.queenname; suitnumber = 3;  power = 4;}
-		if (card == s.jack1) {h.spade.jack1bool = true; name = s.jackname; suitnumber = 3;  power = 5;}
-		if (card == s.jack2) {h.spade.jack2bool = true; name = s.jackname; suitnumber = 3;  power = 5;}
-		if (card == s.nine1) {h.spade.nine1bool = true; name = s.ninename; suitnumber = 3;  power = 6;}
-		if (card == s.nine2) {h.spade.nine2bool = true; name = s.ninename; suitnumber = 3;  power = 6;}
+		if (card == s.ten2) {h.spade.ten2bool = true; name = s.tenname; suitnumber = 3; played = false; power = 2;}
+		if (card == s.king1) {h.spade.king1bool = true; name = s.kingname; suitnumber = 3; played = false;  power = 3;}
+		if (card == s.king2) {h.spade.king2bool = true; name = s.kingname; suitnumber = 3; played = false;  power = 3;}
+		if (card == s.queen1) {h.spade.queen1bool = true; name = s.queenname; suitnumber = 3; played = false;  power = 4;}
+		if (card == s.queen2) {h.spade.queen2bool = true; name = s.queenname; suitnumber = 3; played = false;  power = 4;}
+		if (card == s.jack1) {h.spade.jack1bool = true; name = s.jackname; suitnumber = 3; played = false;  power = 5;}
+		if (card == s.jack2) {h.spade.jack2bool = true; name = s.jackname; suitnumber = 3; played = false;  power = 5;}
+		if (card == s.nine1) {h.spade.nine1bool = true; name = s.ninename; suitnumber = 3; played = false;  power = 6;}
+		if (card == s.nine2) {h.spade.nine2bool = true; name = s.ninename; suitnumber = 3; played = false;  power = 6;}
 		suit c("Club");
-		if (card == c.ace1) {h.club.ace1bool = true; name = c.acename; suitnumber = 4; power = 1;}
-		if (card == c.ace2) {h.club.ace2bool = true; name = c.acename; suitnumber = 4; power = 1;}
-		if (card == c.ten1) {h.club.ten1bool = true; name = c.tenname; suitnumber = 4; power = 2;}
-		if (card == c.ten2) {h.club.ten2bool = true; name = c.tenname; suitnumber = 4; power = 2;}
-		if (card == c.king1) {h.club.king1bool = true; name = c.kingname; suitnumber = 4; power = 3;}
-		if (card == c.king2) {h.club.king2bool = true; name = c.kingname; suitnumber = 4; power = 3;}
-		if (card == c.queen1) {h.club.queen1bool = true; name = c.queenname; suitnumber = 4; power = 4;}
-		if (card == c.queen2) {h.club.queen2bool = true; name = c.queenname; suitnumber = 4; power = 4;}
-		if (card == c.jack1) {h.club.jack1bool = true; name = c.jackname; suitnumber = 4; power = 5;}
-		if (card == c.jack2) {h.club.jack2bool = true; name = c.jackname; suitnumber = 4; power = 5;}
-		if (card == c.nine1) {h.club.nine1bool = true; name = c.ninename; suitnumber = 4; power = 6;}
-		if (card == c.nine2) {h.club.nine2bool = true; name = c.ninename; suitnumber = 4; power = 6;}
+		if (card == c.ace1) {h.club.ace1bool = true; name = c.acename; suitnumber = 4; played = false; power = 1;}
+		if (card == c.ace2) {h.club.ace2bool = true; name = c.acename; suitnumber = 4; played = false; power = 1;}
+		if (card == c.ten1) {h.club.ten1bool = true; name = c.tenname; suitnumber = 4; played = false; power = 2;}
+		if (card == c.ten2) {h.club.ten2bool = true; name = c.tenname; suitnumber = 4; played = false; power = 2;}
+		if (card == c.king1) {h.club.king1bool = true; name = c.kingname; suitnumber = 4; played = false; power = 3;}
+		if (card == c.king2) {h.club.king2bool = true; name = c.kingname; suitnumber = 4; played = false; power = 3;}
+		if (card == c.queen1) {h.club.queen1bool = true; name = c.queenname; suitnumber = 4; played = false; power = 4;}
+		if (card == c.queen2) {h.club.queen2bool = true; name = c.queenname; suitnumber = 4; played = false; power = 4;}
+		if (card == c.jack1) {h.club.jack1bool = true; name = c.jackname; suitnumber = 4; played = false; power = 5;}
+		if (card == c.jack2) {h.club.jack2bool = true; name = c.jackname; suitnumber = 4; played = false; power = 5;}
+		if (card == c.nine1) {h.club.nine1bool = true; name = c.ninename; suitnumber = 4; played = false; power = 6;}
+		if (card == c.nine2) {h.club.nine2bool = true; name = c.ninename; suitnumber = 4; played = false; power = 6;}
 		number = card; 
 		played = false;
 		

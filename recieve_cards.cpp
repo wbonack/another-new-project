@@ -6,6 +6,8 @@ player recieve_cards(int recieve_cardscounter)
 	int card1 = 0, card2 = 0, card3 = 0, card4 = 0,  card5 = 0,  card6 = 0, card7 = 0,  card8 = 0,  card9 = 0, card10 = 0,
 		card11 = 0, card12 = 0;
 	
+	string player_name;
+	
 	/* initialize random seed: */ ///Found in hand.cpp after deal()
 	srand_();
 	
@@ -13,6 +15,7 @@ player recieve_cards(int recieve_cardscounter)
 
 	if (recieve_cardscounter == 1) // This runs the first time recieve_cards is called and makes the deck.
 	{
+		player_name = "Player";
 		int card_numbers_array[48]; // This has the 48 numbers for the cards thats will be randomized	-- This is only used in if statement
 		while(number < 48) // This loop makes card_numbers_array[] equal to 1 - 48
 		{ 
@@ -41,6 +44,18 @@ player recieve_cards(int recieve_cardscounter)
 		}
 		out.close();
 	
+	}
+	if (recieve_cardscounter == 2)
+	{
+		player_name = "West";
+	}
+	if (recieve_cardscounter == 3)
+	{
+		player_name = "North";
+	}
+	if (recieve_cardscounter == 4)
+	{
+		player_name = "East";
 	}
 
 	number = 0;
@@ -88,6 +103,8 @@ player recieve_cards(int recieve_cardscounter)
 	card12 = card_numbers_array[min]; min++;
 
 	player play(card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12); 
+
+	play.player_name = player_name;
 
 	return play;
 }

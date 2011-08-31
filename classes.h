@@ -129,11 +129,18 @@ public:
 	int * card5ptr; int * card6ptr; int * card7ptr; int * card8ptr;
 	int * card9ptr; int * card10ptr; int * card11ptr; int * card12ptr;
 	
+	string player_name;
+	
 	int pass_possibility1;
 	int pass_possibility2;
 	int pass_possibility3;
 	int pass_possibility4;
-
+	
+	string pass_possibility_name1;
+	string pass_possibility_name2;
+	string pass_possibility_name3;
+	string pass_possibility_name4;
+	
 	int ord1,ord2,ord3,ord4,ord5,ord6,ord7,ord8,ord9,ord10,ord11,ord12;
 	string order1, order2, order3, order4, order5, order6, order7, order8, order9, order10, order11, order12;
 
