@@ -1,0 +1,21 @@
+X is: 2
+hearts: 1
+hearts power: 4
+diamonds: 4
+diamonds power: 11
+spades: 4
+spades power: 20
+clubs: 3
+clubs power: 16
+suit[0] is: 1
+suit[1] is: 0
+suit[2] is: 0
+suit[3] is: 0
+1 can be eliminated from consideration.
+suitworth 1st operation! 2.75
+suitworth of diamonds: 0.5
+suitworth 1st operation! 5
+suitworth of spades: 2.75
+suitworth 1st operation! 5.33333
+suitworth of clubs: 3.83333
+Suit diamonds was picked!

@@ -84,10 +84,10 @@ int pass4(string & winner, string & suitname, player & play, player & nplay) // 
 	
 	card card_array_eligible[12];
 	
-	int hit_array[5];
+	int hit_array[6];
 	
 	int zero_array_int = 0;
-	while (zero_array_int < 5)
+	while (zero_array_int < 6)
 	{
 		hit_array[zero_array_int] = 0;
 		zero_array_int++;
@@ -102,35 +102,77 @@ int pass4(string & winner, string & suitname, player & play, player & nplay) // 
 	
 	
 	int array_counter = 0;
-	int card_checking = 0;
+	int card_checking = 1;
 	
-	while (card_checking < 5)
+	while (card_checking < 6)
 	{
 		array_counter = 0;
 		
 		while (array_counter < 12)
 		{
+			cout << "card power: " << card_array[array_counter].power << " loop power " << card_checking << "card suitnumber " << card_array[array_counter].suitnumber << " suittonumber " << suittonumber(suitname) << endl;
+			
+			/// This loop checks if the card is a trump card. 
 			if (card_array[array_counter].power == card_checking && card_array[array_counter].suitnumber == suittonumber(suitname))
 			{
-				
+				cout << " Got past loop card - card power: " << card_array[array_counter].power << " loop power " << card_checking << "card suitnumber " << card_array[array_counter].suitnumber << " suittonumber " << suittonumber(suitname) << endl;
 				if (eligible_cards + hit_array[card_checking] <4)
 				{
+				cout << "Got past the if statement :)" << endl;
+				card_array_eligible[eligible_cards + hit_array[card_checking]] = card_array[array_counter];
 				
-				card_array_eligible[eligible_cards + hit_ace_of_trump_times] = card_array[array_counter];
-				
-				hit_array[card_checking]++;
-				
+				hit_array[card_checking]++; 
 				}
 			}
-			
+
 			array_counter++;
 		}
 		
 		eligible_cards += hit_array[card_checking];
+		
+		if (eligible_cards > 3)
+		{
+			break;
+		}
+		
 		cout << "Eligible cards after card " << card_checking << " is " << eligible_cards << endl;
 		card_checking++;
 	}
 	
+	array_counter = 0;
+	card_checking = 1;
+	
+	while (card_checking < 6)
+	{
+		array_counter = 0;
+		while (array_counter < 12)
+		{
+			cout << "card power: " << card_array[array_counter].power << " loop power " << card_checking << "card suitnumber " << card_array[array_counter].suitnumber << " suittonumber " << suittonumber(suitname) << endl;
+			/// This loop checks for parts of a pinochle.
+			if ((card_array[array_counter].power == 4 && card_array[array_counter].suitnumber == 3) || (card_array[array_counter].power == 5 && card_array[array_counter].suitnumber == 2) )
+			{
+				cout << " Got past loop card pinochle! - card power: " << card_array[array_counter].power << " loop power " << card_checking << "card suitnumber " << card_array[array_counter].suitnumber << " suittonumber " << suittonumber(suitname) << endl;
+				if (eligible_cards + hit_array[card_checking] <4)
+				{
+				cout << "Got past the if statement :)" << endl;
+				card_array_eligible[eligible_cards + hit_array[card_checking]] = card_array[array_counter];
+				
+				hit_array[card_checking]++; 
+				}
+			}
+			array_counter++;
+		}
+		
+		eligible_cards += hit_array[card_checking];
+		
+		if (eligible_cards > 3)
+		{
+			break;
+		}
+		
+		cout << "Eligible cards after card " << card_checking << " is " << eligible_cards << endl;
+		card_checking++;
+	}
 	
 	if (eligible_cards > 3)
 	{
